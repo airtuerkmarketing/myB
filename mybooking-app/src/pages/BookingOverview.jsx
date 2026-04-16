@@ -3,6 +3,7 @@ import { useTranslation } from "../hooks/useTranslation";
 import { bookingData } from "../data/dummyData";
 import FlightCard from "../components/booking/FlightCard";
 import ActionButtons from "../components/booking/ActionButtons";
+import CrossSellCarousel from "../components/crosssell/CrossSellCarousel";
 
 function PageHeader() {
   const { t } = useTranslation();
@@ -127,6 +128,14 @@ export default function BookingOverview() {
           style={{ animationDelay: `${(bookingData.flights.length + 1) * 100}ms` }}
         >
           <CabinBaggageInfo />
+        </div>
+
+        {/* Cross-sell */}
+        <div
+          className="animate-fade-in-up"
+          style={{ animationDelay: `${(bookingData.flights.length + 2) * 100}ms` }}
+        >
+          <CrossSellCarousel offers={bookingData.crossSellOffers} />
         </div>
       </div>
     </main>

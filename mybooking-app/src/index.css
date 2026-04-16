@@ -73,6 +73,10 @@
   animation: shimmer 2.5s ease-in-out infinite;
 }
 
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
 body {
   margin: 0;
   font-family: var(--font-sans);
