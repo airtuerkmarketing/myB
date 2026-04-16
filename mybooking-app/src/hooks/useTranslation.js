@@ -6,5 +6,6 @@ export function useTranslation() {
   if (!context) {
     throw new Error("useTranslation must be used within a LanguageProvider");
   }
-  return context;
+  const { t, language, setLanguage } = context;
+  return { t, language, setLanguage };
 }
