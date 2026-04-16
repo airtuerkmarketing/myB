@@ -36,14 +36,7 @@ export default function App() {
           </AppLayout>
         }
       />
-      <Route
-        path="/checkin/:flightId"
-        element={
-          <AppLayout>
-            <CheckinPage />
-          </AppLayout>
-        }
-      />
+      <Route path="/checkin/:flightId" element={<CheckinPage />} />
     </Routes>
   );
 }
