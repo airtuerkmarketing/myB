@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Ticket, User } from "lucide-react";
 import Input from "../ui/Input";
@@ -8,6 +8,7 @@ import { useTranslation } from "../../hooks/useTranslation";
 export default function SearchForm() {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const formRef = useRef(null);
 
   const [pnr, setPnr] = useState("");
   const [surname, setSurname] = useState("");
@@ -20,6 +21,10 @@ export default function SearchForm() {
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
+      // Trigger shake animation
+      formRef.current?.classList.remove("animate-shake");
+      void formRef.current?.offsetWidth; // reflow to restart animation
+      formRef.current?.classList.add("animate-shake");
       return;
     }
 
@@ -29,7 +34,7 @@ export default function SearchForm() {
 
   return (
     <div className="mt-8 md:mt-10 w-full px-1">
-      <div className="flex flex-col gap-3">
+      <div ref={formRef} className="flex flex-col gap-3">
         <Input
           placeholder={t("landing.pnrPlaceholder")}
           icon={Ticket}

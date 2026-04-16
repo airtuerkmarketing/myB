@@ -27,8 +27,8 @@ export default function Input({
           value={value}
           onChange={onChange}
           className={`
-            w-full px-4 py-3 bg-surface border border-transparent rounded-xl
-            text-text-primary placeholder:text-text-muted
+            w-full px-4 py-3 max-sm:py-3.5 bg-surface border border-transparent rounded-xl
+            text-base text-text-primary placeholder:text-text-muted
             focus:border-primary focus:ring-2 focus:ring-primary/10 focus:bg-white outline-none
             transition-all duration-200
             ${Icon ? "pl-11" : ""}
@@ -37,7 +37,9 @@ export default function Input({
           {...props}
         />
       </div>
-      {error && <span className="text-red-500 text-xs">{error}</span>}
+      {error && error.trim() && (
+        <span className="text-red-500 text-xs">{error}</span>
+      )}
     </div>
   );
 }

@@ -1,9 +1,11 @@
+import { useState, useEffect } from "react";
 import { Briefcase, Info } from "lucide-react";
 import { useTranslation } from "../hooks/useTranslation";
 import { bookingData } from "../data/dummyData";
 import FlightCard from "../components/booking/FlightCard";
 import ActionButtons from "../components/booking/ActionButtons";
 import CrossSellCarousel from "../components/crosssell/CrossSellCarousel";
+import { SkeletonCard } from "../components/ui/Skeleton";
 
 function PageHeader() {
   const { t } = useTranslation();
@@ -30,7 +32,7 @@ function PageHeader() {
           <p className="text-sm text-text-primary leading-snug">
             {t("overview.helpAvatar")}
           </p>
-          <button className="text-sm text-primary font-medium hover:underline mt-0.5">
+          <button className="text-sm text-primary font-medium hover:underline mt-0.5 min-h-[44px] flex items-center">
             {t("overview.helpAvatarLink")}
           </button>
         </div>
@@ -93,6 +95,13 @@ function ReferenceBar() {
 }
 
 export default function BookingOverview() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setIsLoading(false), 800);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <main className="flex-1 bg-gray-50/50 min-h-screen">
       <div className="max-w-5xl mx-auto px-4 md:px-8 py-6">
@@ -102,41 +111,51 @@ export default function BookingOverview() {
 
         <ReferenceBar />
 
-        {/* Flight cards */}
-        <div className="flex flex-col gap-6 mt-2">
-          {bookingData.flights.map((flight, index) => (
-            <div
-              key={flight.id}
-              className="animate-fade-in-up"
-              style={{ animationDelay: `${(index + 1) * 100}ms` }}
-            >
-              <FlightCard
-                flight={flight}
-                passengers={bookingData.passengers}
-              />
-              {flight.status !== "cancelled" && (
-                <ActionButtons flight={flight} />
-              )}
-              <CheckinFeeHint />
+        {isLoading ? (
+          /* Skeleton loading state */
+          <div className="flex flex-col gap-6 mt-2">
+            <SkeletonCard />
+            <SkeletonCard />
+          </div>
+        ) : (
+          <>
+            {/* Flight cards */}
+            <div className="flex flex-col gap-6 mt-2">
+              {bookingData.flights.map((flight, index) => (
+                <div
+                  key={flight.id}
+                  className="animate-fade-in-up"
+                  style={{ animationDelay: `${(index + 1) * 100}ms` }}
+                >
+                  <FlightCard
+                    flight={flight}
+                    passengers={bookingData.passengers}
+                  />
+                  {flight.status !== "cancelled" && (
+                    <ActionButtons flight={flight} />
+                  )}
+                  <CheckinFeeHint />
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
 
-        {/* Cabin baggage info */}
-        <div
-          className="animate-fade-in-up mt-6"
-          style={{ animationDelay: `${(bookingData.flights.length + 1) * 100}ms` }}
-        >
-          <CabinBaggageInfo />
-        </div>
+            {/* Cabin baggage info */}
+            <div
+              className="animate-fade-in-up mt-6"
+              style={{ animationDelay: `${(bookingData.flights.length + 1) * 100}ms` }}
+            >
+              <CabinBaggageInfo />
+            </div>
 
-        {/* Cross-sell */}
-        <div
-          className="animate-fade-in-up"
-          style={{ animationDelay: `${(bookingData.flights.length + 2) * 100}ms` }}
-        >
-          <CrossSellCarousel offers={bookingData.crossSellOffers} />
-        </div>
+            {/* Cross-sell */}
+            <div
+              className="animate-fade-in-up"
+              style={{ animationDelay: `${(bookingData.flights.length + 2) * 100}ms` }}
+            >
+              <CrossSellCarousel offers={bookingData.crossSellOffers} />
+            </div>
+          </>
+        )}
       </div>
     </main>
   );

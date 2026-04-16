@@ -3,12 +3,14 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import { LanguageProvider } from "./context/LanguageContext";
 import App from "./App";
+import OfflineBanner from "./components/ui/OfflineBanner";
 import "./index.css";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
       <LanguageProvider>
+        <OfflineBanner />
         <App />
       </LanguageProvider>
     </BrowserRouter>

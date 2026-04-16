@@ -7,9 +7,9 @@ const variantClasses = {
 };
 
 const sizeClasses = {
-  sm: "py-2 px-4 text-sm",
-  md: "py-2.5 px-5 text-sm",
-  lg: "py-3 px-6 text-base",
+  sm: "py-2 px-4 text-sm min-h-[44px]",
+  md: "py-2.5 px-5 text-sm min-h-[44px] max-sm:py-3",
+  lg: "py-3 px-6 text-base min-h-[44px] max-sm:py-3.5",
 };
 
 export default function Button({
@@ -28,10 +28,11 @@ export default function Button({
       className={`
         rounded-xl font-semibold transition-all duration-200
         flex items-center justify-center gap-2
+        active:scale-[0.98] touch-action-manipulation
         ${variantClasses[variant]}
         ${sizeClasses[size]}
         ${fullWidth ? "w-full" : ""}
-        ${disabled ? "opacity-50 cursor-not-allowed" : ""}
+        ${disabled ? "opacity-50 cursor-not-allowed active:scale-100" : ""}
         ${className}
       `}
       {...props}
