@@ -118,6 +118,16 @@ body {
   padding-top: env(safe-area-inset-top);
 }
 
+/* Dark mode base overrides */
+.dark body,
+.dark {
+  color-scheme: dark;
+}
+.dark body {
+  background-color: #111827;
+  color: #f3f4f6;
+}
+
 #root {
   min-height: 100svh;
   display: flex;

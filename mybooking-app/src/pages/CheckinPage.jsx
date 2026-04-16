@@ -1,22 +1,26 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import { bookingData } from "../data/dummyData";
 import CheckinHeader from "../components/checkin/CheckinHeader";
+import StepIndicator from "../components/checkin/StepIndicator";
 import PassengerSelect from "../components/checkin/PassengerSelect";
 import MealSelector from "../components/checkin/MealSelector";
 import CheckinFooter from "../components/checkin/CheckinFooter";
+import CheckinSuccess from "../components/checkin/CheckinSuccess";
+import { useToast } from "../components/ui/Toast";
 
 export default function CheckinPage() {
   const { flightId } = useParams();
+  const { addToast } = useToast();
 
   const flight = bookingData.flights.find((f) => f.id === flightId) ?? bookingData.flights[0];
 
-  // First passenger pre-selected
   const [selectedPassengers, setSelectedPassengers] = useState([
     bookingData.passengers[0].id,
   ]);
-
   const [selectedMeals, setSelectedMeals] = useState([]);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const togglePassenger = (id) => {
     setSelectedPassengers((prev) =>
@@ -24,13 +28,23 @@ export default function CheckinPage() {
     );
   };
 
-  const toggleMeal = (mealId) => {
-    setSelectedMeals((prev) =>
-      prev.includes(mealId)
-        ? prev.filter((m) => m !== mealId)
-        : [...prev, mealId]
-    );
-  };
+  const toggleMeal = useCallback(
+    (mealId) => {
+      setSelectedMeals((prev) => {
+        const isRemoving = prev.includes(mealId);
+        const next = isRemoving
+          ? prev.filter((m) => m !== mealId)
+          : [...prev, mealId];
+
+        const meal = bookingData.meals.find((m) => m.id === mealId);
+        if (meal && !isRemoving) {
+          addToast(`${meal.name} hinzugefügt`, "success");
+        }
+        return next;
+      });
+    },
+    [addToast]
+  );
 
   const total = useMemo(() => {
     return selectedMeals.reduce((sum, mealId) => {
@@ -47,20 +61,29 @@ export default function CheckinPage() {
   }, [selectedPassengers]);
 
   const handleCheckin = () => {
-    alert(
-      `Check-in erfolgreich!\n\nPassagiere: ${selectedPassengers.length}\nMahlzeiten: ${selectedMeals.length}\nGesamt: €${total.toFixed(2)}`
-    );
+    setIsProcessing(true);
+    setTimeout(() => {
+      setIsProcessing(false);
+      setIsSuccess(true);
+      addToast("Check-in erfolgreich!", "success");
+    }, 2000);
   };
 
+  if (isSuccess) {
+    return <CheckinSuccess />;
+  }
+
   return (
-    <main className="flex-1 bg-white min-h-screen">
+    <main className="flex-1 bg-white dark:bg-gray-900 min-h-screen">
       <CheckinHeader
         referenceNumber={bookingData.referenceNumber}
         flightData={flight}
       />
 
+      <StepIndicator currentStep={1} />
+
       <div className="max-w-lg mx-auto px-4 pb-32">
-        <div className="animate-fade-in-up">
+        <div className="animate-fade-in">
           <PassengerSelect
             passengers={bookingData.passengers}
             selectedPassengers={selectedPassengers}
@@ -68,7 +91,7 @@ export default function CheckinPage() {
           />
         </div>
 
-        <div className="animate-fade-in-up [animation-delay:150ms]">
+        <div className="animate-fade-in [animation-delay:150ms]">
           <MealSelector
             meals={bookingData.meals}
             selectedMeals={selectedMeals}
@@ -81,7 +104,8 @@ export default function CheckinPage() {
       <CheckinFooter
         total={total}
         onCheckin={handleCheckin}
-        disabled={selectedPassengers.length === 0}
+        disabled={selectedPassengers.length === 0 || isProcessing}
+        isProcessing={isProcessing}
       />
     </main>
   );
