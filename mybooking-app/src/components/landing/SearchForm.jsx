@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Ticket, User } from "lucide-react";
+import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useTranslation } from "../../hooks/useTranslation";
@@ -33,10 +34,11 @@ export default function SearchForm() {
   };
 
   return (
-    <div className="mt-8 md:mt-10 w-full px-1">
-      <div ref={formRef} className="flex flex-col gap-3">
+    <div className="mt-10 max-w-sm md:max-w-md mx-auto w-full">
+      <Card ref={formRef} className="p-1 rounded-2xl border-border/50 shadow-sm hover:shadow-md transition-shadow">
+        {/* PNR Input */}
         <div className="relative">
-          <Ticket size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground/60" />
+          <Ticket size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground/40 z-10" />
           <Input
             placeholder={t("landing.pnrPlaceholder")}
             value={pnr}
@@ -44,11 +46,16 @@ export default function SearchForm() {
               setPnr(e.target.value);
               if (errors.pnr) setErrors((prev) => ({ ...prev, pnr: undefined }));
             }}
-            className={cn("pl-11", errors.pnr && "border-destructive focus-visible:ring-destructive/20")}
+            className={cn(
+              "border-0 border-b border-border/50 rounded-none rounded-t-xl focus-visible:ring-0 h-13 px-4 pl-11 text-base bg-transparent placeholder:text-muted-foreground/50",
+              errors.pnr && "bg-destructive/5"
+            )}
           />
         </div>
+
+        {/* Surname Input */}
         <div className="relative">
-          <User size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground/60" />
+          <User size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground/40 z-10" />
           <Input
             placeholder={t("landing.surnamePlaceholder")}
             value={surname}
@@ -56,14 +63,19 @@ export default function SearchForm() {
               setSurname(e.target.value);
               if (errors.surname) setErrors((prev) => ({ ...prev, surname: undefined }));
             }}
-            className={cn("pl-11", errors.surname && "border-destructive focus-visible:ring-destructive/20")}
+            className={cn(
+              "border-0 rounded-none rounded-b-xl focus-visible:ring-0 h-13 px-4 pl-11 text-base bg-transparent placeholder:text-muted-foreground/50",
+              errors.surname && "bg-destructive/5"
+            )}
           />
         </div>
-      </div>
+      </Card>
+
+      {/* CTA — black button like Airbnb */}
       <Button
-        size="lg"
+        variant="secondary"
         onClick={handleSubmit}
-        className="mt-4 w-full rounded-xl h-12 text-base font-semibold hover:scale-[1.01] active:scale-[0.99] transition-transform"
+        className="mt-4 w-full h-12 rounded-xl bg-foreground text-background hover:bg-foreground/90 font-semibold text-sm cursor-pointer"
       >
         {t("landing.cta")}
       </Button>

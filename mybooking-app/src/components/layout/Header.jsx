@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Search, Copy, Check, Sun, Moon } from "lucide-react";
+import { Search, Copy, Check, Sun, Moon, Accessibility } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { bookingData } from "../../data/dummyData";
@@ -9,7 +9,7 @@ import { toast } from "@/hooks/useToast";
 
 function Logo({ light = false }) {
   return (
-    <Link to="/" className="text-xl tracking-tight">
+    <Link to="/" className="text-lg tracking-tight">
       <span className="font-normal text-destructive">my</span>
       <span className={`font-bold ${light ? "text-white" : "text-foreground"}`}>
         Booking
@@ -37,22 +37,19 @@ function ThemeToggle({ light = false }) {
 function LandingHeader() {
   return (
     <header className="relative z-10">
-      {/* Mobile */}
-      <div className="sm:hidden py-4 px-5 flex items-center justify-between">
+      {/* Mobile — clean, minimal */}
+      <div className="sm:hidden py-5 px-5 flex items-center justify-between">
         <Logo />
-        <div className="flex items-center gap-1">
-          <LanguageSwitcher />
-          <ThemeToggle />
-        </div>
+        <LanguageSwitcher />
       </div>
 
-      {/* Desktop */}
-      <div className="hidden sm:block max-w-3xl mx-auto mt-4 px-4">
-        <div className="bg-foreground dark:bg-card rounded-2xl py-3 px-6 flex items-center justify-between">
+      {/* Desktop — floating pill */}
+      <div className="hidden sm:block max-w-xl mx-auto mt-6 px-4">
+        <div className="bg-foreground rounded-2xl px-5 py-2.5 flex items-center justify-between">
           <Logo light />
           <div className="flex items-center gap-2">
             <LanguageSwitcher dark />
-            <ThemeToggle light />
+            <Accessibility size={16} className="text-white/40" />
           </div>
         </div>
       </div>
