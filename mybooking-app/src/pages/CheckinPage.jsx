@@ -7,11 +7,10 @@ import PassengerSelect from "../components/checkin/PassengerSelect";
 import MealSelector from "../components/checkin/MealSelector";
 import CheckinFooter from "../components/checkin/CheckinFooter";
 import CheckinSuccess from "../components/checkin/CheckinSuccess";
-import { useToast } from "../components/ui/Toast";
+import { toast } from "@/hooks/useToast";
 
 export default function CheckinPage() {
   const { flightId } = useParams();
-  const { addToast } = useToast();
 
   const flight = bookingData.flights.find((f) => f.id === flightId) ?? bookingData.flights[0];
 
@@ -38,12 +37,12 @@ export default function CheckinPage() {
 
         const meal = bookingData.meals.find((m) => m.id === mealId);
         if (meal && !isRemoving) {
-          addToast(`${meal.name} hinzugefügt`, "success");
+          toast({ title: `${meal.name} hinzugefügt`, variant: "success" });
         }
         return next;
       });
     },
-    [addToast]
+    []
   );
 
   const total = useMemo(() => {
@@ -65,7 +64,7 @@ export default function CheckinPage() {
     setTimeout(() => {
       setIsProcessing(false);
       setIsSuccess(true);
-      addToast("Check-in erfolgreich!", "success");
+      toast({ title: "Check-in erfolgreich!", variant: "success" });
     }, 2000);
   };
 
@@ -74,7 +73,7 @@ export default function CheckinPage() {
   }
 
   return (
-    <main className="flex-1 bg-white dark:bg-gray-900 min-h-screen">
+    <main className="flex-1 bg-card min-h-screen">
       <CheckinHeader
         referenceNumber={bookingData.referenceNumber}
         flightData={flight}

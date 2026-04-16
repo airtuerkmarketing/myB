@@ -1,20 +1,31 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #0A82DF;
-  --color-primary-dark: #0869B3;
-  --color-accent: #E2001A;
-  --color-checkin-green: #16A34A;
-  --color-cancelled-red: #DC2626;
-  --color-closed-gray: #6B7280;
-  --color-surface: #F5F5F5;
-  --color-surface-white: #FFFFFF;
-  --color-text-primary: #111827;
-  --color-text-secondary: #6B7280;
-  --color-text-muted: #9CA3AF;
-  --color-border: #E5E7EB;
-
   --font-sans: "DM Sans", system-ui, sans-serif;
+
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-border: hsl(var(--border));
+  --color-ring: hsl(var(--ring));
+  --color-checkin-green: hsl(var(--checkin-green));
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
 
   /* Animations */
   --animate-fade-in-up: fade-in-up 0.4s ease-out both;
@@ -28,43 +39,78 @@
   --animate-bounce-in: bounce-in 0.4s ease-out both;
 }
 
-/* 1. fadeInUp — hero, cards, staggered content */
+:root {
+  --background: 0 0% 98%;
+  --foreground: 0 0% 7%;
+  --card: 0 0% 100%;
+  --card-foreground: 0 0% 7%;
+  --primary: 207 91% 46%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 0 0% 96%;
+  --secondary-foreground: 0 0% 7%;
+  --muted: 0 0% 96%;
+  --muted-foreground: 0 0% 45%;
+  --accent: 0 0% 96%;
+  --accent-foreground: 0 0% 7%;
+  --destructive: 0 84% 50%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 0 0% 90%;
+  --ring: 207 91% 46%;
+  --radius: 0.75rem;
+  --checkin-green: 142 71% 45%;
+}
+
+.dark {
+  --background: 222 47% 11%;
+  --foreground: 210 40% 98%;
+  --card: 222 47% 13%;
+  --card-foreground: 210 40% 98%;
+  --primary: 207 91% 50%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 217 33% 17%;
+  --secondary-foreground: 210 40% 98%;
+  --muted: 217 33% 17%;
+  --muted-foreground: 215 20% 65%;
+  --accent: 217 33% 17%;
+  --accent-foreground: 210 40% 98%;
+  --destructive: 0 84% 55%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 217 33% 20%;
+  --ring: 207 91% 50%;
+  --checkin-green: 142 71% 45%;
+}
+
+/* Keyframes */
 @keyframes fade-in-up {
   from { opacity: 0; transform: translateY(12px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* 2. fadeIn — overlays, backdrops */
 @keyframes fade-in {
   from { opacity: 0; }
   to   { opacity: 1; }
 }
 
-/* 3. slideUp — bottom sheets, modals */
 @keyframes slide-up {
   from { opacity: 0; transform: translateY(100%); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* 4. pulse-soft — check-in badge attention */
 @keyframes pulse-soft {
   0%, 100% { opacity: 1; }
   50%      { opacity: 0.7; }
 }
 
-/* pulse-subtle — green glow */
 @keyframes pulse-subtle {
-  0%, 100% { box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.15); }
-  50%      { box-shadow: 0 0 0 6px rgba(22, 163, 74, 0.08); }
+  0%, 100% { box-shadow: 0 0 0 3px hsl(142 71% 45% / 0.15); }
+  50%      { box-shadow: 0 0 0 6px hsl(142 71% 45% / 0.08); }
 }
 
-/* 5. shimmer — CTA button highlight sweep */
 @keyframes shimmer {
   0%, 100% { background-position: -200% center; }
   50%      { background-position: 200% center; }
 }
 
-/* 6. shake — form validation error */
 @keyframes shake {
   0%, 100% { transform: translateX(0); }
   15%      { transform: translateX(-6px); }
@@ -74,13 +120,11 @@
   75%      { transform: translateX(-2px); }
 }
 
-/* 7. skeleton-shimmer — loading placeholders */
 @keyframes skeleton-shimmer {
   0%   { background-position: -200% 0; }
   100% { background-position: 200% 0; }
 }
 
-/* 8. bounce-in — success checkmark */
 @keyframes bounce-in {
   0%   { opacity: 0; transform: scale(0); }
   60%  { transform: scale(1.15); }
@@ -111,21 +155,15 @@
 body {
   margin: 0;
   font-family: var(--font-sans);
-  color: var(--color-text-primary);
-  background-color: var(--color-surface);
+  color: hsl(var(--foreground));
+  background-color: hsl(var(--background));
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   padding-top: env(safe-area-inset-top);
 }
 
-/* Dark mode base overrides */
-.dark body,
 .dark {
   color-scheme: dark;
-}
-.dark body {
-  background-color: #111827;
-  color: #f3f4f6;
 }
 
 #root {

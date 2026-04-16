@@ -1,16 +1,17 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Accessibility, Search, Copy, Check, Sun, Moon } from "lucide-react";
+import { Search, Copy, Check, Sun, Moon } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { bookingData } from "../../data/dummyData";
 import { useTheme } from "../../context/ThemeContext";
-import { useToast } from "../ui/Toast";
+import { toast } from "@/hooks/useToast";
 
 function Logo({ light = false }) {
   return (
     <Link to="/" className="text-xl tracking-tight">
-      <span className="font-normal text-accent">my</span>
-      <span className={`font-bold ${light ? "text-white" : "text-gray-900 dark:text-gray-100"}`}>
+      <span className="font-normal text-destructive">my</span>
+      <span className={`font-bold ${light ? "text-white" : "text-foreground"}`}>
         Booking
       </span>
     </Link>
@@ -21,17 +22,15 @@ function ThemeToggle({ light = false }) {
   const { theme, toggleTheme } = useTheme();
 
   return (
-    <button
+    <Button
+      variant="ghost"
+      size="icon"
       onClick={toggleTheme}
-      className={`p-2 rounded-lg transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center ${
-        light
-          ? "text-white/60 hover:text-white/90"
-          : "text-gray-400 hover:bg-gray-100 hover:text-gray-600 dark:hover:bg-gray-800"
-      }`}
+      className={light ? "text-white/60 hover:text-white/90 hover:bg-white/10" : ""}
       aria-label="Toggle theme"
     >
       {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
-    </button>
+    </Button>
   );
 }
 
@@ -41,21 +40,19 @@ function LandingHeader() {
       {/* Mobile */}
       <div className="sm:hidden py-4 px-5 flex items-center justify-between">
         <Logo />
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1">
           <LanguageSwitcher />
           <ThemeToggle />
-          <Accessibility size={18} className="text-gray-400" />
         </div>
       </div>
 
       {/* Desktop */}
       <div className="hidden sm:block max-w-3xl mx-auto mt-4 px-4">
-        <div className="bg-gray-900 dark:bg-gray-800 rounded-2xl py-3 px-6 flex items-center justify-between">
+        <div className="bg-foreground dark:bg-card rounded-2xl py-3 px-6 flex items-center justify-between">
           <Logo light />
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
             <LanguageSwitcher dark />
             <ThemeToggle light />
-            <Accessibility size={18} className="text-white/60" />
           </div>
         </div>
       </div>
@@ -65,28 +62,27 @@ function LandingHeader() {
 
 function CopyRef({ refNumber }) {
   const [copied, setCopied] = useState(false);
-  const { addToast } = useToast();
 
   const handleCopy = () => {
     navigator.clipboard.writeText(refNumber);
     setCopied(true);
-    addToast("PNR in Zwischenablage kopiert", "success");
+    toast({ title: "PNR kopiert", description: `${refNumber} in Zwischenablage kopiert`, variant: "default" });
     setTimeout(() => setCopied(false), 2000);
   };
 
   return (
     <button
       onClick={handleCopy}
-      className="flex items-center gap-1.5 bg-gray-100 dark:bg-gray-800 rounded-lg px-3 py-1 min-h-[44px] text-sm font-mono text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+      className="flex items-center gap-1.5 bg-muted rounded-xl px-3 py-1 min-h-[44px] text-sm font-mono text-foreground hover:bg-accent transition-colors cursor-pointer"
     >
-      <span className="hidden sm:inline text-gray-400 font-sans text-xs">
-        airtuerk Referenz
+      <span className="hidden sm:inline text-muted-foreground font-sans text-xs">
+        Ref
       </span>
-      <span>{refNumber}</span>
+      <span className="font-medium">{refNumber}</span>
       {copied ? (
-        <Check size={14} className="text-green-500" />
+        <Check size={14} className="text-checkin-green" />
       ) : (
-        <Copy size={14} className="text-gray-400" />
+        <Copy size={14} className="text-muted-foreground" />
       )}
     </button>
   );
@@ -94,18 +90,16 @@ function CopyRef({ refNumber }) {
 
 function AppHeader() {
   return (
-    <header className="bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800 py-3 px-5">
+    <header className="bg-card border-b border-border py-3 px-5">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <Logo />
 
-        {/* Center — search icon, desktop only */}
         <div className="hidden md:flex items-center">
-          <button className="p-2 rounded-lg text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-gray-600 transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center">
+          <Button variant="ghost" size="icon">
             <Search size={18} />
-          </button>
+          </Button>
         </div>
 
-        {/* Right */}
         <div className="flex items-center gap-2">
           <div className="hidden sm:block">
             <LanguageSwitcher />

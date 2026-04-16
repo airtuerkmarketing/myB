@@ -1,25 +1,28 @@
+import { cn } from "@/lib/utils";
+
 function SkeletonBlock({ className = "" }) {
   return (
     <div
-      className={`rounded-lg bg-gradient-to-r from-gray-100 via-gray-200 to-gray-100 bg-[length:200%_100%] animate-skeleton ${className}`}
+      className={cn(
+        "rounded-lg bg-gradient-to-r from-muted via-muted-foreground/10 to-muted bg-[length:200%_100%] animate-skeleton",
+        className
+      )}
     />
   );
 }
 
 export function SkeletonCard() {
   return (
-    <div className="bg-white rounded-2xl border border-gray-100 p-5 md:p-6">
+    <div className="bg-card rounded-2xl border border-border/60 p-5 md:p-6">
       <div className="md:flex gap-8">
         {/* Left: flight info skeleton */}
         <div className="md:w-[38%] shrink-0">
-          {/* Airline header */}
           <div className="flex items-center gap-2.5">
-            <SkeletonBlock className="w-6 h-6 rounded-full" />
+            <SkeletonBlock className="w-9 h-9 rounded-full" />
             <SkeletonBlock className="h-4 w-24" />
             <SkeletonBlock className="h-4 w-16 ml-auto" />
           </div>
 
-          {/* Times */}
           <div className="flex items-center justify-between mt-6">
             <div>
               <SkeletonBlock className="h-3 w-12 mb-2" />
@@ -34,8 +37,7 @@ export function SkeletonCard() {
             </div>
           </div>
 
-          {/* Badge */}
-          <SkeletonBlock className="h-10 w-48 rounded-xl mt-5" />
+          <SkeletonBlock className="h-10 w-full rounded-xl mt-5" />
         </div>
 
         {/* Right: passenger table skeleton (desktop) */}
@@ -46,7 +48,7 @@ export function SkeletonCard() {
             ))}
           </div>
           {[1, 2, 3].map((row) => (
-            <div key={row} className="flex gap-4 py-3 border-b border-gray-50">
+            <div key={row} className="flex gap-4 py-3 border-b border-border/30">
               <SkeletonBlock className="h-4 w-40" />
               <SkeletonBlock className="h-4 w-28" />
               <SkeletonBlock className="h-4 w-12" />

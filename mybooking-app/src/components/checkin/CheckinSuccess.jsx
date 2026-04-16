@@ -1,23 +1,23 @@
 import { useNavigate } from "react-router-dom";
 import { Check, Download, ArrowLeft } from "lucide-react";
-import Button from "../ui/Button";
+import { Button } from "@/components/ui/button";
 
 export default function CheckinSuccess() {
   const navigate = useNavigate();
 
   return (
-    <div className="flex-1 flex flex-col items-center justify-center px-6 py-16 bg-white min-h-screen">
+    <div className="flex-1 flex flex-col items-center justify-center px-6 py-16 bg-card min-h-screen">
       {/* Animated checkmark */}
-      <div className="w-20 h-20 rounded-full bg-green-100 flex items-center justify-center animate-bounce-in">
-        <div className="w-14 h-14 rounded-full bg-green-600 flex items-center justify-center">
+      <div className="w-20 h-20 rounded-full bg-checkin-green/10 flex items-center justify-center animate-bounce-in">
+        <div className="w-14 h-14 rounded-full bg-checkin-green flex items-center justify-center">
           <Check size={28} className="text-white" strokeWidth={3} />
         </div>
       </div>
 
-      <h1 className="text-2xl font-bold text-text-primary mt-6 text-center">
+      <h1 className="text-2xl font-bold text-foreground mt-6 text-center">
         Check-in erfolgreich!
       </h1>
-      <p className="text-sm text-text-secondary mt-2 text-center max-w-xs">
+      <p className="text-sm text-muted-foreground mt-2 text-center max-w-xs">
         Deine Bordkarte ist bereit. Du kannst sie jetzt herunterladen oder per E-Mail erhalten.
       </p>
 
@@ -41,16 +41,17 @@ export default function CheckinSuccess() {
 
       {/* Actions */}
       <div className="flex flex-col gap-3 w-full max-w-xs mt-8">
-        <Button variant="primary" size="lg" fullWidth icon={Download}>
+        <Button size="lg" className="w-full rounded-xl gap-2">
+          <Download size={18} />
           Bordkarte herunterladen
         </Button>
         <Button
           variant="outline"
           size="lg"
-          fullWidth
-          icon={ArrowLeft}
+          className="w-full rounded-xl gap-2"
           onClick={() => navigate("/booking")}
         >
+          <ArrowLeft size={18} />
           Zurück zur Übersicht
         </Button>
       </div>
