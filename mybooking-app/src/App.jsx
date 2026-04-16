@@ -5,16 +5,45 @@ import LandingPage from "./pages/LandingPage";
 import BookingOverview from "./pages/BookingOverview";
 import CheckinPage from "./pages/CheckinPage";
 
-export default function App() {
+function LandingLayout() {
   return (
     <>
-      <Header />
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/booking" element={<BookingOverview />} />
-        <Route path="/checkin/:flightId" element={<CheckinPage />} />
-      </Routes>
+      <Header variant="landing" />
+      <LandingPage />
       <Footer />
     </>
+  );
+}
+
+function AppLayout({ children }) {
+  return (
+    <>
+      <Header variant="app" />
+      {children}
+    </>
+  );
+}
+
+export default function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<LandingLayout />} />
+      <Route
+        path="/booking"
+        element={
+          <AppLayout>
+            <BookingOverview />
+          </AppLayout>
+        }
+      />
+      <Route
+        path="/checkin/:flightId"
+        element={
+          <AppLayout>
+            <CheckinPage />
+          </AppLayout>
+        }
+      />
+    </Routes>
   );
 }
