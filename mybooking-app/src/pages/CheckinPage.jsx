@@ -73,15 +73,15 @@ export default function CheckinPage() {
   }
 
   return (
-    <main className="flex-1 bg-card min-h-screen">
+    <main className="flex-1 bg-background min-h-screen pb-28">
       <CheckinHeader
         referenceNumber={bookingData.referenceNumber}
         flightData={flight}
       />
 
-      <StepIndicator currentStep={1} />
+      <div className="max-w-lg mx-auto px-4">
+        <StepIndicator currentStep={1} />
 
-      <div className="max-w-lg mx-auto px-4 pb-32">
         <div className="animate-fade-in">
           <PassengerSelect
             passengers={bookingData.passengers}

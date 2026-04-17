@@ -1,3 +1,4 @@
+import { Check } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const steps = [
@@ -8,48 +9,48 @@ const steps = [
 
 export default function StepIndicator({ currentStep = 1 }) {
   return (
-    <div className="flex items-center justify-center gap-0 px-4 py-4">
+    <div className="flex items-center justify-between px-4 mt-6 mb-2">
       {steps.map((step, i) => {
         const isActive = step.key === currentStep;
         const isCompleted = step.key < currentStep;
 
         return (
-          <div key={step.key} className="flex items-center">
-            {i > 0 && (
+          <div key={step.key} className="flex items-center flex-1 last:flex-none">
+            {/* Step circle + label */}
+            <div className="flex flex-col items-center">
               <div
                 className={cn(
-                  "w-10 md:w-16 h-0.5",
-                  isCompleted || isActive ? "bg-primary" : "bg-border"
-                )}
-              />
-            )}
-
-            <div className="flex flex-col items-center gap-1.5">
-              <div
-                className={cn(
-                  "w-8 h-8 rounded-full flex items-center justify-center text-xs font-semibold transition-all duration-200",
-                  isActive
-                    ? "bg-primary text-primary-foreground shadow-[0_0_0_3px_hsl(var(--primary)/0.15)]"
-                    : isCompleted
-                      ? "bg-primary text-primary-foreground"
-                      : "bg-muted text-muted-foreground"
+                  "w-7 h-7 rounded-full flex items-center justify-center text-xs font-semibold transition-all duration-200",
+                  isActive || isCompleted
+                    ? "bg-primary text-white"
+                    : "bg-muted text-muted-foreground"
                 )}
               >
-                {isCompleted ? "✓" : step.key}
+                {isCompleted ? <Check size={14} strokeWidth={2.5} /> : step.key}
               </div>
               <span
                 className={cn(
-                  "text-[10px] md:text-xs whitespace-nowrap",
+                  "text-[10px] text-center mt-1 whitespace-nowrap",
                   isActive
-                    ? "font-semibold text-primary"
+                    ? "text-primary font-semibold"
                     : isCompleted
-                      ? "font-medium text-primary"
+                      ? "text-primary font-medium"
                       : "text-muted-foreground"
                 )}
               >
                 {step.label}
               </span>
             </div>
+
+            {/* Connector line (after each step except last) */}
+            {i < steps.length - 1 && (
+              <div
+                className={cn(
+                  "flex-1 h-0.5 mx-2 mb-4",
+                  step.key < currentStep ? "bg-primary" : "bg-border"
+                )}
+              />
+            )}
           </div>
         );
       })}

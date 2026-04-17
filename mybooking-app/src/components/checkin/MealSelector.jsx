@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { X, Plus, Minus } from "lucide-react";
+import { Plus, Minus, UtensilsCrossed, X } from "lucide-react";
 import { useTranslation } from "../../hooks/useTranslation";
-import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from "@/components/ui/sheet";
+import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 
@@ -13,11 +14,11 @@ export default function MealSelector({ meals, selectedMeals, onSelectMeal, passe
   return (
     <div className="mt-8">
       <div className="flex items-center justify-between">
-        <h2 className="text-lg font-semibold text-foreground">
+        <h2 className="text-base font-semibold text-foreground">
           {t("checkin.meals")}
         </h2>
         {count > 0 && (
-          <span className="text-primary text-sm font-medium">
+          <span className="text-sm text-primary font-medium">
             {t("checkin.mealsSelected", { count })}
           </span>
         )}
@@ -27,13 +28,14 @@ export default function MealSelector({ meals, selectedMeals, onSelectMeal, passe
       </p>
 
       {/* Browse button */}
-      <button
+      <Button
+        variant="outline"
         onClick={() => setIsOpen(true)}
-        className="mt-4 w-full border border-dashed border-border rounded-xl py-4 px-5 flex items-center justify-center gap-2 text-sm font-medium text-foreground hover:border-primary hover:border-solid hover:bg-primary/5 transition-all duration-200 cursor-pointer"
+        className="w-full h-12 rounded-xl border-dashed border-border hover:border-primary hover:bg-primary/[0.02] font-medium text-sm gap-2 mt-3 cursor-pointer"
       >
-        <span>🍴</span>
+        <UtensilsCrossed size={16} />
         {t("checkin.browseMenu")}
-      </button>
+      </Button>
 
       {/* Selected meals preview */}
       {count > 0 && (
@@ -59,12 +61,13 @@ export default function MealSelector({ meals, selectedMeals, onSelectMeal, passe
 
       {/* Meal sheet */}
       <Sheet open={isOpen} onOpenChange={setIsOpen}>
-        <SheetContent side="bottom" className="max-h-[80vh] overflow-y-auto">
+        <SheetContent side="bottom" className="rounded-t-2xl max-h-[85vh] overflow-y-auto">
           <div className="md:hidden flex justify-center pt-1 pb-2">
             <div className="w-10 h-1 rounded-full bg-border" />
           </div>
           <SheetHeader>
-            <SheetTitle>Bordverpflegung</SheetTitle>
+            <SheetTitle>Menü wählen</SheetTitle>
+            <SheetDescription>{passengerName}</SheetDescription>
           </SheetHeader>
 
           <div className="p-5 flex flex-col gap-3">
@@ -81,7 +84,7 @@ export default function MealSelector({ meals, selectedMeals, onSelectMeal, passe
                       : "bg-card border-border/60 hover:border-border"
                   )}
                 >
-                  <span className="text-2xl shrink-0">{meal.image}</span>
+                  <span className="text-[32px] shrink-0">{meal.image}</span>
 
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2">
@@ -89,7 +92,7 @@ export default function MealSelector({ meals, selectedMeals, onSelectMeal, passe
                         {meal.name}
                       </span>
                       {index === 0 && (
-                        <Badge variant="outline" className="bg-amber-50 text-amber-700 border-amber-200 text-[10px] font-semibold rounded-full">
+                        <Badge variant="outline" className="bg-amber-50 text-amber-700 border-amber-200 text-[10px] font-semibold rounded-full px-2 py-0.5">
                           Beliebt
                         </Badge>
                       )}
@@ -107,7 +110,7 @@ export default function MealSelector({ meals, selectedMeals, onSelectMeal, passe
                       className={cn(
                         "w-7 h-7 rounded-full flex items-center justify-center transition-all duration-200",
                         isSelected
-                          ? "bg-primary text-primary-foreground"
+                          ? "bg-primary text-white"
                           : "bg-muted text-muted-foreground"
                       )}
                     >

@@ -7,8 +7,8 @@ export default function CheckinFooter({ total, onCheckin, disabled, isProcessing
   const { t } = useTranslation();
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 md:sticky md:bottom-0 z-40 border-t border-border backdrop-blur-lg bg-card/90">
-      <div className="max-w-lg mx-auto flex items-center justify-between px-5 py-4 pb-[max(1rem,env(safe-area-inset-bottom))]">
+    <div className="fixed bottom-0 inset-x-0 z-50 bg-background/90 backdrop-blur-xl border-t border-border/50">
+      <div className="max-w-lg mx-auto flex items-center justify-between px-5 py-4 pb-[max(env(safe-area-inset-bottom),16px)]">
         <div>
           <p className="text-xs text-muted-foreground">{t("checkin.total")}</p>
           <p className="text-xl font-bold text-foreground">
@@ -17,18 +17,14 @@ export default function CheckinFooter({ total, onCheckin, disabled, isProcessing
         </div>
 
         <Button
-          size="lg"
           disabled={disabled}
           onClick={onCheckin}
-          className={cn(
-            "px-8 rounded-xl font-semibold",
-            !disabled && !isProcessing && "animate-shimmer"
-          )}
+          className={cn("rounded-xl h-11 px-8 font-semibold")}
         >
           {isProcessing ? (
             <>
               <Loader2 size={18} className="animate-spin" />
-              Wird verarbeitet...
+              Wird bearbeitet...
             </>
           ) : (
             t("checkin.doCheckin")
