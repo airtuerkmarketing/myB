@@ -63,19 +63,19 @@ function CopyRef({ refNumber }) {
   const handleCopy = () => {
     navigator.clipboard.writeText(refNumber);
     setCopied(true);
-    toast({ title: "PNR kopiert", description: `${refNumber} in Zwischenablage kopiert`, variant: "default" });
+    toast({ title: "Kopiert!", description: `${refNumber} in Zwischenablage`, variant: "default" });
     setTimeout(() => setCopied(false), 2000);
   };
 
   return (
     <button
       onClick={handleCopy}
-      className="flex items-center gap-1.5 bg-muted rounded-xl px-3 py-1 min-h-[44px] text-sm font-mono text-foreground hover:bg-accent transition-colors cursor-pointer"
+      className="flex items-center gap-2 bg-muted rounded-lg px-3 py-1.5 text-xs font-mono cursor-pointer hover:bg-accent transition-colors"
     >
-      <span className="hidden sm:inline text-muted-foreground font-sans text-xs">
-        Ref
+      <span className="hidden sm:inline text-muted-foreground font-sans">
+        airtuerk Referenz
       </span>
-      <span className="font-medium">{refNumber}</span>
+      <span className="font-semibold text-foreground">{refNumber}</span>
       {copied ? (
         <Check size={14} className="text-checkin-green" />
       ) : (
@@ -87,12 +87,12 @@ function CopyRef({ refNumber }) {
 
 function AppHeader() {
   return (
-    <header className="bg-card border-b border-border py-3 px-5">
-      <div className="max-w-7xl mx-auto flex items-center justify-between">
+    <header className="sticky top-0 z-50 backdrop-blur-xl bg-background/80 border-b border-border/50 px-4 md:px-8 py-3">
+      <div className="max-w-5xl mx-auto flex items-center justify-between">
         <Logo />
 
         <div className="hidden md:flex items-center">
-          <Button variant="ghost" size="icon">
+          <Button variant="ghost" size="icon" className="rounded-full">
             <Search size={18} />
           </Button>
         </div>
@@ -101,7 +101,6 @@ function AppHeader() {
           <div className="hidden sm:block">
             <LanguageSwitcher />
           </div>
-          <ThemeToggle />
           <CopyRef refNumber={bookingData.referenceNumber} />
         </div>
       </div>
