@@ -18,7 +18,7 @@ function MobilePassengerList({ passengers }) {
             {p.firstName} {p.lastName}
           </span>
           {p.seat ? (
-            <span className="ml-auto font-mono font-semibold text-xs text-foreground bg-muted rounded-md px-2 py-0.5">
+            <span className="ml-auto font-mono font-semibold text-xs text-foreground bg-[#F7F7F7] rounded-md px-1.5 py-0.5">
               {p.seat}
             </span>
           ) : (
@@ -38,12 +38,11 @@ function DesktopPassengerTable({ passengers, airlineRef }) {
 
   return (
     <div className="hidden md:block">
-      {/* Airline PNR */}
       {airlineRef && (
         <div className="px-5 pt-4 pb-3 flex items-center gap-1.5">
           <span className="text-xs text-muted-foreground">Airline PNR:</span>
           <span className="font-mono font-medium text-foreground text-xs">{airlineRef}</span>
-          <button className="ml-1 text-muted-foreground hover:text-foreground transition-colors">
+          <button className="ml-1 text-muted-foreground hover:text-foreground transition-colors cursor-pointer">
             <Copy size={12} />
           </button>
         </div>
@@ -53,49 +52,48 @@ function DesktopPassengerTable({ passengers, airlineRef }) {
         <table className="w-full text-left">
           <thead>
             <tr className="border-b border-border/50">
-              {[
-                t("overview.passenger"),
-                t("overview.ticketNr"),
-                t("overview.luggage"),
-                t("overview.seat"),
-                t("overview.extras"),
-              ].map((col) => (
-                <th
-                  key={col}
-                  className="pb-2 text-[11px] uppercase tracking-wider text-muted-foreground font-medium pr-4"
-                >
-                  {col}
-                </th>
-              ))}
+              <th className="pb-2 text-[11px] uppercase tracking-wider text-muted-foreground font-medium pr-4">
+                {t("overview.passenger")}
+              </th>
+              <th className="pb-2 text-[11px] uppercase tracking-wider text-muted-foreground font-medium pr-4">
+                {t("overview.ticketNr")}
+              </th>
+              <th className="pb-2 text-[11px] uppercase tracking-wider text-muted-foreground font-medium pr-4 hidden lg:table-cell">
+                {t("overview.luggage")}
+              </th>
+              <th className="pb-2 text-[11px] uppercase tracking-wider text-muted-foreground font-medium pr-4">
+                {t("overview.seat")}
+              </th>
+              <th className="pb-2 text-[11px] uppercase tracking-wider text-muted-foreground font-medium hidden lg:table-cell">
+                {t("overview.extras")}
+              </th>
             </tr>
           </thead>
           <tbody>
-            {passengers.map((p, i) => (
+            {passengers.map((p) => (
               <tr
                 key={p.id}
-                className={cn(
-                  "border-b border-border/30 last:border-0",
-                )}
+                className="border-b border-border/30 last:border-0"
               >
                 <td className="py-2.5 pr-4 text-sm font-medium text-foreground whitespace-nowrap">
                   {p.title} {p.firstName} {p.lastName}
                 </td>
-                <td className="py-2.5 pr-4 text-xs font-mono text-muted-foreground whitespace-nowrap">
+                <td className="py-2.5 pr-4 text-xs font-mono text-[#717171] whitespace-nowrap">
                   {p.ticketNumber}
                 </td>
-                <td className="py-2.5 pr-4 text-sm text-muted-foreground">
+                <td className="py-2.5 pr-4 text-sm text-[#717171] hidden lg:table-cell">
                   {p.luggage}
                 </td>
                 <td className="py-2.5 pr-4">
                   {p.seat ? (
-                    <span className="font-mono font-semibold text-sm text-foreground">
+                    <span className="font-mono font-semibold text-xs text-foreground bg-[#F7F7F7] rounded-md px-1.5 py-0.5">
                       {p.seat}
                     </span>
                   ) : (
                     <span className="text-muted-foreground">&mdash;</span>
                   )}
                 </td>
-                <td className="py-2.5">
+                <td className="py-2.5 hidden lg:table-cell">
                   {p.hasWheelchair ? (
                     <Accessibility size={16} className="text-primary" />
                   ) : null}

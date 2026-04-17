@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import { Download, Send, Settings, Plus } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { useTranslation } from "../../hooks/useTranslation";
 
 export default function ActionButtons({ flight }) {
@@ -10,40 +9,63 @@ export default function ActionButtons({ flight }) {
 
   return (
     <>
-      {/* Desktop — horizontal bar inside card */}
-      <div className="hidden md:flex items-center gap-2 px-5 py-4 border-t border-border/50">
-        <Button variant="outline" size="sm" className="rounded-[10px] h-9 text-xs font-medium gap-1.5">
+      {/* Desktop — horizontal bar with flex-wrap */}
+      <div className="hidden md:flex items-center gap-2 px-5 py-3 border-t border-[#EBEBEB] flex-wrap">
+        <button className="shrink-0 h-9 px-3 bg-[#FAFAFA] border border-[#EBEBEB] text-[#222222] text-xs font-medium rounded-[10px] flex items-center gap-1.5 whitespace-nowrap hover:bg-[#F0F0F0] transition-colors cursor-pointer">
           <Download size={14} />
           {t("overview.downloadTicket")}
-        </Button>
-        <Button variant="outline" size="sm" className="rounded-[10px] h-9 text-xs font-medium gap-1.5">
+        </button>
+        <button className="shrink-0 h-9 px-3 bg-[#FAFAFA] border border-[#EBEBEB] text-[#222222] text-xs font-medium rounded-[10px] flex items-center gap-1.5 whitespace-nowrap hover:bg-[#F0F0F0] transition-colors cursor-pointer">
           <Send size={14} />
           {t("overview.sendTicket")}
-        </Button>
-        <Button variant="outline" size="sm" className="rounded-[10px] h-9 text-xs font-medium gap-1.5">
+        </button>
+        <button className="shrink-0 h-9 px-3 bg-[#FAFAFA] border border-[#EBEBEB] text-[#222222] text-xs font-medium rounded-[10px] flex items-center gap-1.5 whitespace-nowrap hover:bg-[#F0F0F0] transition-colors cursor-pointer">
           <Settings size={14} />
           {t("overview.manageBooking")}
-        </Button>
-        <Button size="sm" className="rounded-[10px] h-9 text-xs font-medium gap-1.5 ml-auto">
+        </button>
+        <div className="flex-1" />
+        <button
+          onClick={() => alert("Extras coming soon")}
+          className="shrink-0 h-9 px-4 bg-[#0A82DF] text-white text-xs font-semibold rounded-[10px] flex items-center gap-1.5 whitespace-nowrap hover:bg-[#0B6AB2] active:bg-[#06528A] transition-colors cursor-pointer"
+        >
           <Plus size={14} />
           {t("overview.addExtras")}
-        </Button>
+        </button>
       </div>
 
       {/* Mobile */}
-      <div className="md:hidden flex gap-3 px-5 pb-5">
+      <div className="md:hidden px-5 pb-5 pt-3 flex flex-col gap-2.5">
         {isCheckinOpen && (
-          <Button
-            className="flex-1 rounded-[10px] h-11 font-semibold"
+          <button
             onClick={() => navigate(`/checkin/${flight.id}`)}
+            className="w-full h-[46px] bg-[#1C9218] text-white font-semibold text-sm rounded-[10px] hover:brightness-110 transition-all cursor-pointer"
           >
-            {t("overview.checkinStarted")}
-          </Button>
+            {t("overview.checkinNow")}
+          </button>
         )}
-        <Button variant="outline" className="rounded-[10px] h-11 gap-1.5">
+
+        <button
+          onClick={() => alert("Extras coming soon")}
+          className="w-full h-[46px] bg-[#0A82DF] text-white font-semibold text-sm rounded-[10px] flex items-center justify-center gap-2 hover:bg-[#0B6AB2] active:bg-[#06528A] transition-colors cursor-pointer"
+        >
           <Plus size={16} />
-          {t("overview.extras")}
-        </Button>
+          {t("overview.addExtras")}
+        </button>
+
+        <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-hide">
+          <button className="shrink-0 h-9 px-3 bg-[#FAFAFA] border border-[#EBEBEB] text-[#222222] text-xs font-medium rounded-[10px] flex items-center gap-1.5 whitespace-nowrap cursor-pointer">
+            <Download size={14} />
+            {t("overview.eticket")}
+          </button>
+          <button className="shrink-0 h-9 px-3 bg-[#FAFAFA] border border-[#EBEBEB] text-[#222222] text-xs font-medium rounded-[10px] flex items-center gap-1.5 whitespace-nowrap cursor-pointer">
+            <Send size={14} />
+            {t("overview.send")}
+          </button>
+          <button className="shrink-0 h-9 px-3 bg-[#FAFAFA] border border-[#EBEBEB] text-[#222222] text-xs font-medium rounded-[10px] flex items-center gap-1.5 whitespace-nowrap cursor-pointer">
+            <Settings size={14} />
+            {t("overview.manage")}
+          </button>
+        </div>
       </div>
     </>
   );
