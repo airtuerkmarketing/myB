@@ -53,6 +53,29 @@
     "seatSelection": "Seat selection",
     "chooseSeat": "Choose seat"
   },
+  "extras": {
+    "title": "Add extras",
+    "luggage": "Additional luggage",
+    "luggageDesc": "Per person, per leg",
+    "seatSelection": "Seat selection",
+    "meals": "In-flight catering",
+    "popular": "Popular",
+    "perPerson": "per person",
+    "perLeg": "per leg",
+    "free": "Free",
+    "extraLegroom": "Extra Legroom",
+    "addToBooking": "Apply",
+    "extrasSelected": "{count} extras selected",
+    "noExtras": "No extras selected",
+    "saved": "Extras saved!",
+    "seatFree": "Available",
+    "seatOccupied": "Occupied",
+    "seatYours": "Your seat",
+    "chooseFor": "Choose for {name}",
+    "add": "Add",
+    "selected": "Selected",
+    "remove": "Remove"
+  },
   "crosssell": {
     "title": "Get more out of your trip",
     "addNow": "Add Now"

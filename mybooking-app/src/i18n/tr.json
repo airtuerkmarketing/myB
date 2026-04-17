@@ -53,6 +53,29 @@
     "seatSelection": "Koltuk seçimi",
     "chooseSeat": "Koltuk seç"
   },
+  "extras": {
+    "title": "Ekstra ekle",
+    "luggage": "Ek bagaj",
+    "luggageDesc": "Kişi başı, uçuş başı",
+    "seatSelection": "Koltuk seçimi",
+    "meals": "Uçak içi ikram",
+    "popular": "Popüler",
+    "perPerson": "kişi başı",
+    "perLeg": "uçuş başı",
+    "free": "Ücretsiz",
+    "extraLegroom": "Extra Legroom",
+    "addToBooking": "Uygula",
+    "extrasSelected": "{count} ekstra seçildi",
+    "noExtras": "Ekstra seçilmedi",
+    "saved": "Ekstralar kaydedildi!",
+    "seatFree": "Boş",
+    "seatOccupied": "Dolu",
+    "seatYours": "Senin koltuğun",
+    "chooseFor": "{name} için seç",
+    "add": "Ekle",
+    "selected": "Seçildi",
+    "remove": "Kaldır"
+  },
   "crosssell": {
     "title": "Seyahatinden daha fazlasını al",
     "addNow": "Şimdi Ekle"

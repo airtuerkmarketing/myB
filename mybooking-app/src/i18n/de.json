@@ -53,6 +53,29 @@
     "seatSelection": "Sitzplatzwahl",
     "chooseSeat": "Sitz wählen"
   },
+  "extras": {
+    "title": "Extras hinzufügen",
+    "luggage": "Zusatzgepäck",
+    "luggageDesc": "Pro Person, pro Strecke",
+    "seatSelection": "Sitzplatzwahl",
+    "meals": "Bordverpflegung",
+    "popular": "Beliebt",
+    "perPerson": "pro Person",
+    "perLeg": "pro Strecke",
+    "free": "Kostenlos",
+    "extraLegroom": "Extra Legroom",
+    "addToBooking": "Übernehmen",
+    "extrasSelected": "{count} Extras ausgewählt",
+    "noExtras": "Keine Extras ausgewählt",
+    "saved": "Extras gespeichert!",
+    "seatFree": "Frei",
+    "seatOccupied": "Belegt",
+    "seatYours": "Dein Sitz",
+    "chooseFor": "Wähle für {name}",
+    "add": "Hinzufügen",
+    "selected": "Ausgewählt",
+    "remove": "Entfernen"
+  },
   "crosssell": {
     "title": "Mehr aus deiner Reise machen",
     "addNow": "Jetzt Hinzufügen"

@@ -64,6 +64,34 @@ export const bookingData = {
     { id: "meal-3", name: "Vegetarian Wrap", description: "Fresh vegetables with hummus in a tortilla wrap", price: 10.0, image: "🌯" },
     { id: "meal-4", name: "Kids Menu", description: "Mini burger with fries and juice", price: 8.0, image: "🍔" },
   ],
+  extras: {
+    luggage: [
+      { id: "lug-1", name: "+15 kg Aufgabegepäck", description: "Pro Person, pro Strecke", price: 29.90, icon: "luggage" },
+      { id: "lug-2", name: "+23 kg Aufgabegepäck", description: "Pro Person, pro Strecke", price: 39.90, icon: "luggage" },
+      { id: "lug-3", name: "+32 kg Aufgabegepäck", description: "Pro Person, pro Strecke", price: 59.90, icon: "luggage" },
+      { id: "lug-4", name: "Sportgepäck", description: "Surfboard, Ski, Golfbag etc.", price: 49.90, icon: "dumbbell" },
+      { id: "lug-5", name: "Übergepäck pro kg", description: "Wird am Flughafen gewogen", price: 8.00, icon: "scale", perUnit: "kg" },
+    ],
+    seats: {
+      rows: 30,
+      columns: ["A", "B", "C", "D", "E", "F"],
+      exitRows: [12, 13],
+      occupiedSeats: ["1B", "1C", "2A", "2D", "3B", "4A", "4E", "5C", "5F", "6A", "6B", "7C", "7D", "8E", "9A", "9F", "10B", "10D", "11A", "12C", "12E", "13B", "14A", "14F", "15D"],
+      pricing: {
+        standard: 0,
+        front: 5,
+        exit: 15,
+      },
+    },
+    meals: [
+      { id: "meal-1", name: "Chicken with Rice", description: "Gegrilltes Hähnchen mit Basmatireis und Gemüse", price: 14.00, emoji: "🍗", popular: true },
+      { id: "meal-2", name: "Pasta Marinara", description: "Penne mit Tomaten-Basilikum-Sauce", price: 12.00, emoji: "🍝", popular: false },
+      { id: "meal-3", name: "Vegetarian Wrap", description: "Frisches Gemüse mit Hummus im Tortilla-Wrap", price: 10.00, emoji: "🌯", popular: false },
+      { id: "meal-4", name: "Caesar Salad", description: "Römersalat mit Parmesan und Croutons", price: 11.00, emoji: "🥗", popular: false },
+      { id: "meal-5", name: "Kids Menü", description: "Mini-Burger mit Pommes und Saft", price: 8.00, emoji: "🍔", popular: false },
+      { id: "meal-6", name: "Snack Box", description: "Sandwich, Muffin und Getränk", price: 6.00, emoji: "☕", popular: false },
+    ],
+  },
   crossSellOffers: [
     { id: "offer-1", title: "SunPriority", subtitle: "Weniger Warteschlangen und schneller Service.", cta: "Jetzt Hinzufügen", provider: "SunExpress", color: "#F97316" },
     { id: "offer-2", title: "Mietwagen ab 23 € in HER", subtitle: "Hol dir deinen Mietwagen in Heraklion für eine entspannte Reise.", cta: "mietwagen.de", provider: "mietwagen.de", color: "#111827" },
