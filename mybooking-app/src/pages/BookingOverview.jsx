@@ -104,7 +104,7 @@ export default function BookingOverview() {
   }, []);
 
   return (
-    <main className="flex-1 bg-[hsl(0_0%_98%)] min-h-screen">
+    <main className="flex-1 bg-[#F7F7F7] min-h-screen">
       <div className="max-w-5xl mx-auto px-4 md:px-8 py-6 md:py-8">
         <div className="animate-fade-in-up">
           <PageHeader />

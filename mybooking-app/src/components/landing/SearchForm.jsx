@@ -75,7 +75,7 @@ export default function SearchForm() {
       <Button
         variant="secondary"
         onClick={handleSubmit}
-        className="mt-4 w-full h-12 rounded-xl bg-foreground text-background hover:bg-foreground/90 font-semibold text-sm cursor-pointer"
+        className="mt-4 w-full h-12 rounded-[10px] bg-foreground text-background hover:bg-foreground/90 font-semibold text-sm cursor-pointer"
       >
         {t("landing.cta")}
       </Button>

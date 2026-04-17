@@ -19,7 +19,7 @@ export default function CheckinFooter({ total, onCheckin, disabled, isProcessing
         <Button
           disabled={disabled}
           onClick={onCheckin}
-          className={cn("rounded-xl h-11 px-8 font-semibold")}
+          className={cn("rounded-[10px] h-11 px-8 font-semibold")}
         >
           {isProcessing ? (
             <>

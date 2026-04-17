@@ -12,19 +12,19 @@ export default function ActionButtons({ flight }) {
     <>
       {/* Desktop — horizontal bar inside card */}
       <div className="hidden md:flex items-center gap-2 px-5 py-4 border-t border-border/50">
-        <Button variant="outline" size="sm" className="rounded-xl h-9 text-xs font-medium gap-1.5">
+        <Button variant="outline" size="sm" className="rounded-[10px] h-9 text-xs font-medium gap-1.5">
           <Download size={14} />
           {t("overview.downloadTicket")}
         </Button>
-        <Button variant="outline" size="sm" className="rounded-xl h-9 text-xs font-medium gap-1.5">
+        <Button variant="outline" size="sm" className="rounded-[10px] h-9 text-xs font-medium gap-1.5">
           <Send size={14} />
           {t("overview.sendTicket")}
         </Button>
-        <Button variant="outline" size="sm" className="rounded-xl h-9 text-xs font-medium gap-1.5">
+        <Button variant="outline" size="sm" className="rounded-[10px] h-9 text-xs font-medium gap-1.5">
           <Settings size={14} />
           {t("overview.manageBooking")}
         </Button>
-        <Button size="sm" className="rounded-xl h-9 text-xs font-medium gap-1.5 ml-auto">
+        <Button size="sm" className="rounded-[10px] h-9 text-xs font-medium gap-1.5 ml-auto">
           <Plus size={14} />
           {t("overview.addExtras")}
         </Button>
@@ -34,13 +34,13 @@ export default function ActionButtons({ flight }) {
       <div className="md:hidden flex gap-3 px-5 pb-5">
         {isCheckinOpen && (
           <Button
-            className="flex-1 rounded-xl h-11 font-semibold"
+            className="flex-1 rounded-[10px] h-11 font-semibold"
             onClick={() => navigate(`/checkin/${flight.id}`)}
           >
             {t("overview.checkinStarted")}
           </Button>
         )}
-        <Button variant="outline" className="rounded-xl h-11 gap-1.5">
+        <Button variant="outline" className="rounded-[10px] h-11 gap-1.5">
           <Plus size={16} />
           {t("overview.extras")}
         </Button>

@@ -21,14 +21,14 @@ export default function CheckinSuccess() {
 
       {/* Actions */}
       <div className="flex flex-col gap-3 w-full max-w-xs mt-8">
-        <Button size="lg" className="w-full rounded-xl gap-2 font-semibold">
+        <Button size="lg" className="w-full rounded-[10px] gap-2 font-semibold">
           <Download size={18} />
           Bordkarte herunterladen
         </Button>
         <Button
           variant="outline"
           size="lg"
-          className="w-full rounded-xl gap-2 font-medium"
+          className="w-full rounded-[10px] gap-2 font-medium"
           onClick={() => navigate("/booking")}
         >
           <ArrowLeft size={18} />

@@ -31,7 +31,7 @@ export default function MealSelector({ meals, selectedMeals, onSelectMeal, passe
       <Button
         variant="outline"
         onClick={() => setIsOpen(true)}
-        className="w-full h-12 rounded-xl border-dashed border-border hover:border-primary hover:bg-primary/[0.02] font-medium text-sm gap-2 mt-3 cursor-pointer"
+        className="w-full h-12 rounded-[10px] border-dashed border-border hover:border-primary hover:bg-primary/[0.02] font-medium text-sm gap-2 mt-3 cursor-pointer"
       >
         <UtensilsCrossed size={16} />
         {t("checkin.browseMenu")}
@@ -78,7 +78,7 @@ export default function MealSelector({ meals, selectedMeals, onSelectMeal, passe
                   key={meal.id}
                   onClick={() => onSelectMeal(meal.id)}
                   className={cn(
-                    "w-full flex items-center gap-3.5 p-3.5 rounded-xl border text-left transition-all duration-200 cursor-pointer",
+                    "w-full flex items-center gap-3.5 p-3.5 rounded-[10px] border text-left transition-all duration-200 cursor-pointer",
                     isSelected
                       ? "bg-primary/5 border-primary/20"
                       : "bg-card border-border/60 hover:border-border"
