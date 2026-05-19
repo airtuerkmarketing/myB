@@ -1,6 +1,9 @@
-import { memo } from "react";
+import { memo, useState } from "react";
 
 export default memo(function OfferCard({ offer }) {
+  const [imgLoaded, setImgLoaded] = useState(false);
+  const [from, to] = offer.gradient ?? ["#222222", "#444444"];
+
   return (
     <div
       onClick={() => alert(offer.cta)}
@@ -8,12 +11,18 @@ export default memo(function OfferCard({ offer }) {
       tabIndex={0}
       onKeyDown={(e) => e.key === "Enter" && alert(offer.cta)}
       className="min-w-[85vw] md:min-w-[340px] snap-center flex-shrink-0 rounded-[20px] md:rounded-[24px] overflow-hidden cursor-pointer group relative h-[280px] md:h-[340px]"
-      style={{ boxShadow: "0 24px 70px rgba(15,23,42,0.14)" }}
+      style={{
+        boxShadow: "0 24px 70px rgba(15,23,42,0.14)",
+        background: `linear-gradient(135deg, ${from}, ${to})`,
+      }}
     >
       <img
         src={offer.image}
-        alt={offer.title}
-        className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+        alt=""
+        onLoad={() => setImgLoaded(true)}
+        className={`absolute inset-0 w-full h-full object-cover transition-all duration-500 group-hover:scale-105 ${
+          imgLoaded ? "opacity-100" : "opacity-0"
+        }`}
         loading="lazy"
       />
 
@@ -43,7 +52,7 @@ export default memo(function OfferCard({ offer }) {
             e.stopPropagation();
             alert(offer.cta);
           }}
-          className="shrink-0 h-[44px] px-4 rounded-[10px] bg-white/18 backdrop-blur-sm text-white text-sm font-semibold border-0 hover:bg-white/28 transition-colors cursor-pointer whitespace-nowrap"
+          className="shrink-0 h-[44px] px-4 rounded-[10px] backdrop-blur-sm text-white text-sm font-semibold transition-colors cursor-pointer whitespace-nowrap"
           style={{ background: "rgba(255,255,255,0.18)" }}
           onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(255,255,255,0.28)")}
           onMouseLeave={(e) => (e.currentTarget.style.background = "rgba(255,255,255,0.18)")}
