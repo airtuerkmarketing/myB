@@ -1,7 +1,7 @@
 import { memo, useState } from "react";
 
 export default memo(function OfferCard({ offer }) {
-  const [imgLoaded, setImgLoaded] = useState(false);
+  const [imgState, setImgState] = useState("loading");
   const [from, to] = offer.gradient ?? ["#222222", "#444444"];
 
   return (
@@ -16,15 +16,18 @@ export default memo(function OfferCard({ offer }) {
         background: `linear-gradient(135deg, ${from}, ${to})`,
       }}
     >
-      <img
-        src={offer.image}
-        alt=""
-        onLoad={() => setImgLoaded(true)}
-        className={`absolute inset-0 w-full h-full object-cover transition-all duration-500 group-hover:scale-105 ${
-          imgLoaded ? "opacity-100" : "opacity-0"
-        }`}
-        loading="lazy"
-      />
+      {imgState !== "error" && (
+        <img
+          src={offer.image}
+          alt=""
+          onLoad={() => setImgState("loaded")}
+          onError={() => setImgState("error")}
+          className={`absolute inset-0 w-full h-full object-cover transition-all duration-500 group-hover:scale-105 ${
+            imgState === "loaded" ? "opacity-100" : "opacity-0"
+          }`}
+          loading="lazy"
+        />
+      )}
 
       <div
         className="absolute inset-0"
