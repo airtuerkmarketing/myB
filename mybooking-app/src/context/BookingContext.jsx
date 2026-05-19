@@ -46,11 +46,26 @@ export function BookingProvider({ children }) {
     [selectedExtras]
   );
 
-  const setLuggage = useCallback((segmentId, passengerId, luggageId) => {
+  const addLuggage = useCallback((segmentId, passengerId, extraId, qty) => {
     setSelectedExtras((prev) => {
       const seg = prev[segmentId] ?? emptySegExtras();
       const luggage = { ...seg.luggage };
-      if (luggageId) luggage[passengerId] = luggageId;
+      const paxLug = { ...(luggage[passengerId] ?? {}) };
+      if (qty > 0) paxLug[extraId] = qty;
+      else delete paxLug[extraId];
+      if (Object.keys(paxLug).length > 0) luggage[passengerId] = paxLug;
+      else delete luggage[passengerId];
+      return { ...prev, [segmentId]: { ...seg, luggage } };
+    });
+  }, []);
+
+  const removeLuggage = useCallback((segmentId, passengerId, extraId) => {
+    setSelectedExtras((prev) => {
+      const seg = prev[segmentId] ?? emptySegExtras();
+      const luggage = { ...seg.luggage };
+      const paxLug = { ...(luggage[passengerId] ?? {}) };
+      delete paxLug[extraId];
+      if (Object.keys(paxLug).length > 0) luggage[passengerId] = paxLug;
       else delete luggage[passengerId];
       return { ...prev, [segmentId]: { ...seg, luggage } };
     });
@@ -84,9 +99,13 @@ export function BookingProvider({ children }) {
       const ext = selectedExtras[segmentId];
       if (!ext) return 0;
       let total = 0;
-      for (const lugId of Object.values(ext.luggage)) {
-        const item = extrasCatalog.luggage.find((l) => l.id === lugId);
-        if (item) total += item.price;
+      for (const paxLug of Object.values(ext.luggage)) {
+        if (typeof paxLug === "object" && paxLug !== null) {
+          for (const [extraId, qty] of Object.entries(paxLug)) {
+            const item = extrasCatalog.luggage.find((l) => l.id === extraId);
+            if (item) total += item.price * qty;
+          }
+        }
       }
       for (const seatCode of Object.values(ext.seats)) {
         const row = parseInt(seatCode, 10);
@@ -114,13 +133,14 @@ export function BookingProvider({ children }) {
       switchScenario,
       checkInPassengers,
       getSegmentExtras,
-      setLuggage,
+      addLuggage,
+      removeLuggage,
       setSeat,
       toggleMeal,
       getSegmentExtrasTotal,
     }),
     [activeScenario, booking, selectedExtras, switchScenario, checkInPassengers,
-     getSegmentExtras, setLuggage, setSeat, toggleMeal, getSegmentExtrasTotal]
+     getSegmentExtras, addLuggage, removeLuggage, setSeat, toggleMeal, getSegmentExtrasTotal]
   );
 
   return (

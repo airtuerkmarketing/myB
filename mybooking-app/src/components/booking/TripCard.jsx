@@ -1,7 +1,8 @@
-import { Fragment, useState } from "react";
+import { Fragment, useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { Plane, Download, Send, Settings, Plus, Check, Circle, Accessibility } from "lucide-react";
 import { useTranslation } from "../../hooks/useTranslation";
+import { useBooking } from "../../context/BookingContext";
 import { AirlineLogo } from "@/components/ui/AirlineLogo";
 import {
   getSegmentCheckinSummary,
@@ -437,12 +438,26 @@ function DesktopPassengers({ passengers, segment, booking }) {
 
 function SegmentActions({ segment, onAddExtras }) {
   const { t } = useTranslation();
+  const { getSegmentExtras } = useBooking();
   const navigate = useNavigate();
   const summary = getSegmentCheckinSummary(segment);
   const cta = getSmartCTA(segment, summary, t);
 
   const showExtras = !["cancelled", "checkin-closed"].includes(segment.status);
   const showMobileCTA = cta?.clickable;
+
+  const extrasCount = useMemo(() => {
+    const ext = getSegmentExtras(segment.id);
+    let c = 0;
+    for (const paxLug of Object.values(ext.luggage)) {
+      if (typeof paxLug === "object" && paxLug !== null) {
+        for (const qty of Object.values(paxLug)) c += qty;
+      }
+    }
+    c += Object.keys(ext.seats).length;
+    for (const mealIds of Object.values(ext.meals)) c += mealIds.length;
+    return c;
+  }, [getSegmentExtras, segment.id]);
 
   const handleCTA = () => {
     if (!cta?.clickable) return;
@@ -474,10 +489,15 @@ function SegmentActions({ segment, onAddExtras }) {
         {showExtras && (
           <button
             onClick={handleExtras}
-            className="shrink-0 h-9 px-4 bg-[#0A82DF] text-white text-xs font-semibold rounded-[10px] flex items-center gap-1.5 whitespace-nowrap hover:bg-[#0B6AB2] active:bg-[#06528A] transition-colors cursor-pointer"
+            className="relative shrink-0 h-9 px-4 bg-[#0A82DF] text-white text-xs font-semibold rounded-[10px] flex items-center gap-1.5 whitespace-nowrap hover:bg-[#0B6AB2] active:bg-[#06528A] transition-colors cursor-pointer"
           >
             <Plus size={14} />
             {t("overview.addExtras")}
+            {extrasCount > 0 && (
+              <span className="absolute -top-1.5 -right-1.5 bg-[#0A82DF] text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center ring-2 ring-white">
+                {extrasCount}
+              </span>
+            )}
           </button>
         )}
       </div>
@@ -499,10 +519,15 @@ function SegmentActions({ segment, onAddExtras }) {
         {showExtras && (
           <button
             onClick={handleExtras}
-            className="w-full h-[46px] bg-[#0A82DF] text-white font-semibold text-sm rounded-[10px] flex items-center justify-center gap-2 hover:bg-[#0B6AB2] active:bg-[#06528A] transition-colors cursor-pointer"
+            className="relative w-full h-[46px] bg-[#0A82DF] text-white font-semibold text-sm rounded-[10px] flex items-center justify-center gap-2 hover:bg-[#0B6AB2] active:bg-[#06528A] transition-colors cursor-pointer"
           >
             <Plus size={16} />
             {t("overview.addExtras")}
+            {extrasCount > 0 && (
+              <span className="absolute -top-1.5 -right-1.5 bg-[#0A82DF] text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center ring-2 ring-white">
+                {extrasCount}
+              </span>
+            )}
           </button>
         )}
 

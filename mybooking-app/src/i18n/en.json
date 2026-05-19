@@ -151,6 +151,7 @@
     "seatFree": "Available",
     "seatOccupied": "Occupied",
     "seatYours": "Your seat",
+    "forWhom": "For whom?",
     "chooseFor": "Choose for {name}",
     "add": "Add",
     "selected": "Selected",
