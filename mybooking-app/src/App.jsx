@@ -6,6 +6,15 @@ import CheckinPage from "./pages/CheckinPage";
 import BoardingPassPage from "./pages/BoardingPassPage";
 import ScenarioSwitcher from "./components/dev/ScenarioSwitcher";
 
+function LandingLayout({ children }) {
+  return (
+    <>
+      <Header variant="landing" />
+      {children}
+    </>
+  );
+}
+
 function AppLayout({ children }) {
   return (
     <>
@@ -19,7 +28,14 @@ export default function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<LandingPage />} />
+        <Route
+          path="/"
+          element={
+            <LandingLayout>
+              <LandingPage />
+            </LandingLayout>
+          }
+        />
         <Route
           path="/booking"
           element={

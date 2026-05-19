@@ -1,7 +1,6 @@
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "../hooks/useTranslation";
-import LanguageSwitcher from "../components/layout/LanguageSwitcher";
 
 export default function LandingPage() {
   const { t } = useTranslation();
@@ -33,25 +32,6 @@ export default function LandingPage() {
 
   return (
     <div className="min-h-[100dvh] bg-white flex flex-col">
-      {/* Mobile Header */}
-      <div className="sm:hidden pt-6 px-5 animate-fade-in">
-        <span className="text-lg tracking-tight">
-          <span className="text-[#ED1C24] font-normal">my</span>
-          <span className="text-[#222222] font-bold">Booking</span>
-        </span>
-      </div>
-
-      {/* Desktop Header — Floating Dark Bar */}
-      <div className="hidden sm:block max-w-xl mx-auto mt-6 px-4 w-full animate-fade-in">
-        <div className="bg-[#222222] rounded-[10px] px-5 py-2.5 flex items-center justify-between">
-          <span className="text-lg tracking-tight">
-            <span className="text-[#ED1C24] font-normal">my</span>
-            <span className="text-white font-bold">Booking</span>
-          </span>
-          <LanguageSwitcher dark />
-        </div>
-      </div>
-
       {/* Content */}
       <div className="flex-1 flex flex-col items-center justify-center px-5">
         <div className="max-w-md mx-auto w-full">
