@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Wrench } from "lucide-react";
 import { useBooking } from "../../context/BookingContext";
 import { useTranslation } from "../../hooks/useTranslation";
 
@@ -39,10 +40,10 @@ export default function ScenarioSwitcher() {
       )}
       <button
         onClick={() => setOpen((p) => !p)}
-        className="h-10 w-10 bg-[#222222] text-white rounded-[10px] shadow-elevation-01 flex items-center justify-center text-lg hover:bg-[#333333] transition-colors cursor-pointer"
+        className="h-10 w-10 bg-white text-[#222222] rounded-[10px] shadow-elevation-01 border border-[#EBEBEB] flex items-center justify-center hover:bg-[#F7F7F7] transition-colors cursor-pointer"
         aria-label="Szenario wechseln"
       >
-        🔧
+        <Wrench size={18} />
       </button>
     </div>
   );
