@@ -2,7 +2,7 @@ import { useState, useEffect, useMemo, useCallback } from "react";
 import { Info } from "lucide-react";
 import { useTranslation } from "../hooks/useTranslation";
 import { useBooking } from "../context/BookingContext";
-import { flattenSegments, sortTrips, crossSellOffers } from "../data/dummyData";
+import { flattenSegments, sortTrips, getCrossSellOffers } from "../data/dummyData";
 import TripCard from "../components/booking/TripCard";
 import CrossSellCarousel from "../components/crosssell/CrossSellCarousel";
 import { SkeletonCard } from "../components/ui/Skeleton";
@@ -56,6 +56,7 @@ export default function BookingOverview() {
 
   const sortedTrips = useMemo(() => sortTrips(booking.trips), [booking]);
   const allSegments = useMemo(() => flattenSegments(booking), [booking]);
+  const crossSellOffers = useMemo(() => getCrossSellOffers(booking), [booking]);
 
   const hasCheckinOpen = useMemo(
     () =>

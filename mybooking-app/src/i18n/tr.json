@@ -140,7 +140,8 @@
   },
   "crosssell": {
     "title": "Seyahatinden daha fazlasını al",
-    "addNow": "Şimdi Ekle"
+    "addNow": "Şimdi Ekle",
+    "learnMore": "Daha fazla bilgi"
   },
   "footer": {
     "terms": "Kullanım Koşulları",

@@ -516,12 +516,81 @@ export const extrasCatalog = {
   seatPricing: { standard: 0, front: 5, exit: 15 },
 };
 
-// ─── CROSS-SELL OFFERS ──────────────────────────────
-export const crossSellOffers = [
-  { id: "offer-1", title: "SunPriority", subtitle: "Weniger Warteschlangen und schneller Service.", cta: "Jetzt Hinzufügen", provider: "SunExpress", color: "#F97316" },
-  { id: "offer-2", title: "Mietwagen ab 23 € in HER", subtitle: "Hol dir deinen Mietwagen in Heraklion für eine entspannte Reise.", cta: "mietwagen.de", provider: "mietwagen.de", color: "#111827" },
-  { id: "offer-3", title: "Premium Upgrade", subtitle: "Weniger Warteschlangen und schneller Service.", cta: "Jetzt Hinzufügen", provider: "Singapore Airlines", color: "#1E3A5F" },
-];
+// ─── CROSS-SELL OFFERS (kontextabhängig) ────────────
+const vacationCodes = new Set(["HER", "AYT", "BCN", "PMI", "IBZ", "FUE", "TFS", "LPA", "BOD", "NCE", "IST"]);
+
+const destinationNames = {
+  HER: "Heraklion", AYT: "Antalya", BCN: "Barcelona", PMI: "Palma",
+  IBZ: "Ibiza", FUE: "Fuerteventura", TFS: "Teneriffa", LPA: "Gran Canaria",
+  IST: "Istanbul", FRA: "Frankfurt", MUC: "München", DUS: "Düsseldorf",
+};
+
+const offerPool = {
+  carRental: (dest, code) => ({
+    id: "cs-car", icon: "car",
+    title: `Mietwagen ab €19/Tag`,
+    subtitle: `Flexibel unterwegs in ${dest} — kostenlos stornierbar bis 24h vorher.`,
+    cta: "Angebote ansehen", provider: "mietwagen.de",
+    gradient: ["#0F172A", "#1E3A5F"],
+  }),
+  hotel: (dest) => ({
+    id: "cs-hotel", icon: "hotel",
+    title: `Hotels in ${dest}`,
+    subtitle: "Geprüfte Hotels zum besten Preis. Kostenlose Stornierung bei den meisten Angeboten.",
+    cta: "Hotels suchen", provider: "Booking.com",
+    gradient: ["#1E40AF", "#3B82F6"],
+  }),
+  activities: (dest) => ({
+    id: "cs-activities", icon: "activities",
+    title: `Erlebnisse in ${dest}`,
+    subtitle: "Touren, Ausflüge und Aktivitäten — von Einheimischen empfohlen.",
+    cta: "Entdecken", provider: "GetYourGuide",
+    gradient: ["#7C3AED", "#A78BFA"],
+  }),
+  sunPriority: () => ({
+    id: "cs-sunpriority", icon: "priority",
+    title: "SunPriority Boarding",
+    subtitle: "Als Erster an Bord. Priority Boarding, extra Handgepäck und bevorzugter Service.",
+    cta: "Jetzt Hinzufügen", provider: "SunExpress",
+    gradient: ["#EA580C", "#F97316"],
+  }),
+  insurance: () => ({
+    id: "cs-insurance", icon: "insurance",
+    title: "Reiseversicherung",
+    subtitle: "Stornoschutz, Gepäckversicherung und medizinische Absicherung ab €4,90 p.P.",
+    cta: "Jetzt absichern", provider: "HanseMerkur",
+    gradient: ["#065F46", "#10B981"],
+  }),
+};
+
+export function getCrossSellOffers(booking) {
+  const destinations = new Set();
+  const airlines = new Set();
+
+  for (const trip of booking.trips) {
+    destinations.add(trip.destination.code);
+    for (const seg of trip.segments) {
+      airlines.add(seg.airline.name);
+    }
+  }
+
+  const offers = [];
+  const firstVacation = [...destinations].find((c) => vacationCodes.has(c));
+  const destName = firstVacation ? (destinationNames[firstVacation] ?? firstVacation) : null;
+
+  if (airlines.has("SunExpress")) {
+    offers.push(offerPool.sunPriority());
+  }
+  if (firstVacation && destName) {
+    offers.push(offerPool.carRental(destName, firstVacation));
+    offers.push(offerPool.hotel(destName));
+    offers.push(offerPool.activities(destName));
+  }
+  offers.push(offerPool.insurance());
+  return offers;
+}
+
+export const crossSellOffers = Object.values(offerPool).map((fn) => fn("Demo", "FRA"));
 
 // ─── DEFAULT-SZENARIO ───────────────────────────────
 export const defaultScenario = "family";

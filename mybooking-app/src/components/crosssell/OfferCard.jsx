@@ -1,47 +1,57 @@
-import { Card } from "@/components/ui/card";
+import { Car, Building2, Compass, Zap, ShieldCheck, ArrowRight } from "lucide-react";
+import { useTranslation } from "../../hooks/useTranslation";
+import { cn } from "@/lib/utils";
 
-const providerEmoji = {
-  SunExpress: "✈️",
-  "mietwagen.de": "🚗",
-  "Singapore Airlines": "🌟",
+const iconMap = {
+  car: Car,
+  hotel: Building2,
+  activities: Compass,
+  priority: Zap,
+  insurance: ShieldCheck,
 };
 
-export default function OfferCard({ offer, isFirst = false }) {
-  const emoji = providerEmoji[offer.provider] ?? "🎁";
+export default function OfferCard({ offer }) {
+  const { t } = useTranslation();
+  const Icon = iconMap[offer.icon] ?? Compass;
+  const [from, to] = offer.gradient ?? ["#222222", "#444444"];
 
   return (
-    <Card className="min-w-[85vw] md:min-w-[300px] snap-center md:snap-start flex-shrink-0 overflow-hidden rounded-2xl border-border/50 hover:shadow-lg transition-all duration-300 cursor-pointer group">
-      {/* Image area */}
-      <div className="h-40 relative overflow-hidden">
-        <div
-          className="absolute inset-0 transition-transform duration-500 group-hover:scale-105"
-          style={{
-            background: `linear-gradient(135deg, ${offer.color}, ${offer.color}dd)`,
-          }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+    <div
+      onClick={() => alert(offer.cta)}
+      className="min-w-[85vw] md:min-w-[300px] snap-center flex-shrink-0 rounded-[16px] overflow-hidden cursor-pointer group relative"
+      style={{ background: `linear-gradient(135deg, ${from}, ${to})` }}
+    >
+      {/* Decorative circle */}
+      <div
+        className="absolute -right-8 -top-8 w-32 h-32 rounded-full opacity-15"
+        style={{ background: `radial-gradient(circle, white, transparent)` }}
+      />
 
-        {/* Emoji */}
-        <div className="absolute inset-0 flex items-center justify-center">
-          <span className="text-5xl relative z-10">{emoji}</span>
-        </div>
-
+      <div className="relative p-5 flex flex-col h-[200px]">
         {/* Provider badge */}
-        <span className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1 text-xs font-semibold text-foreground z-10">
+        <span className="self-start bg-white/20 backdrop-blur-sm text-white text-[10px] font-semibold rounded-full px-2.5 py-1 tracking-wide uppercase">
           {offer.provider}
         </span>
-      </div>
 
-      {/* Text area */}
-      <div className="p-4">
-        <h3 className="text-sm font-semibold text-foreground">{offer.title}</h3>
-        <p className="text-xs text-muted-foreground mt-1 line-clamp-2">
-          {offer.subtitle}
-        </p>
-        <button className="mt-3 text-xs font-semibold text-primary hover:underline cursor-pointer">
+        {/* Icon + title */}
+        <div className="mt-auto">
+          <div className="flex items-center gap-2.5 mb-2">
+            <div className="w-9 h-9 rounded-[10px] bg-white/20 flex items-center justify-center">
+              <Icon size={18} className="text-white" />
+            </div>
+            <h3 className="text-base font-bold text-white leading-tight">{offer.title}</h3>
+          </div>
+          <p className="text-xs text-white/75 leading-relaxed line-clamp-2">
+            {offer.subtitle}
+          </p>
+        </div>
+
+        {/* CTA */}
+        <button className="mt-3 self-start flex items-center gap-1.5 text-xs font-semibold text-white hover:gap-2.5 transition-all">
           {offer.cta}
+          <ArrowRight size={14} className="transition-transform group-hover:translate-x-0.5" />
         </button>
       </div>
-    </Card>
+    </div>
   );
 }
