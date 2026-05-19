@@ -19,6 +19,13 @@ export function ThemeProvider({ children }) {
 
   useEffect(() => {
     document.documentElement.classList.toggle("dark", theme === "dark");
+    const favicon = document.getElementById("favicon");
+    if (favicon) {
+      const base = import.meta.env.BASE_URL;
+      favicon.href = theme === "dark"
+        ? `${base}myBooking_Favicon_White.svg`
+        : `${base}myBooking_Favicon_Black.svg`;
+    }
   }, [theme]);
 
   const toggleTheme = useCallback(() => {
