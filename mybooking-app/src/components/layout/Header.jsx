@@ -9,11 +9,12 @@ import { toast } from "@/hooks/useToast";
 
 function Logo({ light = false }) {
   return (
-    <Link to="/" className="text-lg tracking-tight">
-      <span className="font-normal text-destructive">my</span>
-      <span className={`font-bold ${light ? "text-white" : "text-foreground"}`}>
-        Booking
-      </span>
+    <Link to="/" className="flex items-center">
+      <img
+        src={`${import.meta.env.BASE_URL}myBooking_Logo.svg`}
+        alt="myBooking"
+        className={`h-5 md:h-6 w-auto ${light ? "brightness-0 invert" : ""}`}
+      />
     </Link>
   );
 }
