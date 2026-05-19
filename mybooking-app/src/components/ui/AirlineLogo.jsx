@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, memo } from "react";
 import { cn } from "@/lib/utils";
 
 const airlineConfig = {
@@ -40,7 +40,7 @@ const sizes = {
   lg: { box: 48, font: 17 },
 };
 
-export function AirlineLogo({ airline, size = "md", className }) {
+export const AirlineLogo = memo(function AirlineLogo({ airline, size = "md", className }) {
   const [imgError, setImgError] = useState(false);
   const config = airlineConfig[airline] || {
     colors: ["#6B7280", "#6B7280"],
@@ -63,6 +63,7 @@ export function AirlineLogo({ airline, size = "md", className }) {
         <img
           src={logoUrl}
           alt={airline}
+          loading="lazy"
           className="h-full w-full rounded-full object-cover border border-border/30"
           onError={() => setImgError(true)}
         />
@@ -82,4 +83,4 @@ export function AirlineLogo({ airline, size = "md", className }) {
       )}
     </div>
   );
-}
+})

@@ -443,7 +443,7 @@ function StickyFooter({ currentStep, total, onAction, disabled, isProcessing }) 
           disabled={disabled}
           onClick={onAction}
           className={cn(
-            "h-11 px-8 rounded-[10px] font-semibold text-sm flex items-center gap-2 transition-all cursor-pointer",
+            "h-[46px] px-8 rounded-[10px] font-semibold text-sm flex items-center gap-2 transition-all cursor-pointer",
             isLast
               ? "bg-[#1C9218] text-white hover:brightness-110 disabled:opacity-50"
               : "bg-[#0A82DF] text-white hover:bg-[#0B6AB2] disabled:opacity-50"
@@ -452,7 +452,7 @@ function StickyFooter({ currentStep, total, onAction, disabled, isProcessing }) 
           {isProcessing ? (
             <>
               <Loader2 size={18} className="animate-spin" />
-              <span>Wird bearbeitet...</span>
+              <span>{t("checkin.processing")}</span>
             </>
           ) : isLast ? (
             t("checkin.doCheckin")
@@ -510,7 +510,7 @@ export default function CheckinPage() {
       const next = isRemoving ? prev.filter((m) => m !== mealId) : [...prev, mealId];
       const meal = meals.find((m) => m.id === mealId);
       if (meal && !isRemoving) {
-        toast({ title: `${meal.name} hinzugefügt`, variant: "success" });
+        toast({ title: meal.name, variant: "success" });
       }
       return next;
     });
@@ -587,7 +587,7 @@ export default function CheckinPage() {
       {/* Route info */}
       <div className="px-4 mt-4 max-w-lg mx-auto w-full">
         <h1 className="text-xl font-bold text-[#222222] tracking-tight">
-          {segment.departure.airport} nach {segment.arrival.airport}
+          {t("checkin.routeTo", { from: segment.departure.airport, to: segment.arrival.airport })}
         </h1>
         <div className="flex items-center gap-4 mt-2 text-sm text-[#717171]">
           <span className="flex items-center gap-1.5">

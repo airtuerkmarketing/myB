@@ -178,6 +178,7 @@
     "learnMore": "Daha fazla bilgi"
   },
   "scenario": {
+    "title": "Demo Senaryo",
     "family": "Aile — Gidiş-Dönüş",
     "solo": "Tek Kişi — Sadece Gidiş",
     "multiSegment": "Çift — Aktarmalı Uçuş",

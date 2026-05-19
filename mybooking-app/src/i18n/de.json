@@ -178,6 +178,7 @@
     "learnMore": "Mehr erfahren"
   },
   "scenario": {
+    "title": "Demo-Szenario",
     "family": "Familie — Hin+Rück",
     "solo": "Solo — Nur Hinflug",
     "multiSegment": "Paar — Hinflug mit Umstieg",

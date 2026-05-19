@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { Car, Building2, Compass, Zap, ShieldCheck, ArrowRight } from "lucide-react";
 import { useTranslation } from "../../hooks/useTranslation";
 import { cn } from "@/lib/utils";
@@ -10,7 +11,7 @@ const iconMap = {
   insurance: ShieldCheck,
 };
 
-export default function OfferCard({ offer }) {
+export default memo(function OfferCard({ offer }) {
   const { t } = useTranslation();
   const Icon = iconMap[offer.icon] ?? Compass;
   const [from, to] = offer.gradient ?? ["#222222", "#444444"];
@@ -54,4 +55,4 @@ export default function OfferCard({ offer }) {
       </div>
     </div>
   );
-}
+})

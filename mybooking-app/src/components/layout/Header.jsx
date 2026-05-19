@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { useBooking } from "../../context/BookingContext";
 import { useTheme } from "../../context/ThemeContext";
+import { useTranslation } from "../../hooks/useTranslation";
 import { toast } from "@/hooks/useToast";
 
 function Logo({ light = false }) {
@@ -46,7 +47,7 @@ function LandingHeader() {
 
       {/* Desktop — floating pill */}
       <div className="hidden sm:block max-w-xl mx-auto mt-6 px-4">
-        <div className="bg-foreground rounded-2xl px-5 py-2.5 flex items-center justify-between">
+        <div className="bg-foreground rounded-[10px] px-5 py-2.5 flex items-center justify-between">
           <Logo light />
           <div className="flex items-center gap-2">
             <LanguageSwitcher dark />
@@ -60,11 +61,12 @@ function LandingHeader() {
 
 function CopyRef({ refNumber }) {
   const [copied, setCopied] = useState(false);
+  const { t } = useTranslation();
 
   const handleCopy = () => {
     navigator.clipboard.writeText(refNumber);
     setCopied(true);
-    toast({ title: "Kopiert!", description: `${refNumber} in Zwischenablage`, variant: "default" });
+    toast({ title: "Kopiert!", description: `${refNumber}`, variant: "default" });
     setTimeout(() => setCopied(false), 2000);
   };
 
@@ -74,7 +76,7 @@ function CopyRef({ refNumber }) {
       className="flex items-center gap-2 bg-[#F7F7F7] border border-[#EBEBEB] rounded-[10px] px-3 py-1.5 text-xs font-mono cursor-pointer hover:bg-[#F0F0F0] transition-colors"
     >
       <span className="hidden sm:inline text-[#717171] font-sans">
-        airtuerk Referenz
+        {t("overview.ref")}
       </span>
       <span className="font-semibold text-[#222222]">{refNumber}</span>
       {copied ? (

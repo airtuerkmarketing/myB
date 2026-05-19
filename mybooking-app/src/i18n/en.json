@@ -178,6 +178,7 @@
     "learnMore": "Learn more"
   },
   "scenario": {
+    "title": "Demo Scenario",
     "family": "Family — Round trip",
     "solo": "Solo — One-way flight",
     "multiSegment": "Couple — Connecting flight",
