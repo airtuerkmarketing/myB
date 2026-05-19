@@ -360,14 +360,26 @@ function MealsTab({ segment, passengers, segmentExtras, segmentId }) {
         {extrasCatalog.meals.map((meal) => {
           const isSelected = selectedMeals.includes(meal.id);
           return (
-            <div
+            <button
+              type="button"
               key={meal.id}
-              className="bg-white border border-[#EBEBEB] rounded-[16px] p-4 hover:shadow-elevation-02 transition-shadow"
+              onClick={() => toggleMeal(segmentId, activePax, meal.id)}
+              className={cn(
+                "relative text-left rounded-[16px] p-4 transition-all cursor-pointer",
+                isSelected
+                  ? "bg-[#F0FDF4] border-2 border-[#1C9218] shadow-elevation-02"
+                  : "bg-white border border-[#EBEBEB] hover:border-[#B0B0B0] hover:shadow-elevation-02"
+              )}
             >
+              {isSelected && (
+                <span className="absolute top-3 right-3 w-6 h-6 rounded-full bg-[#1C9218] flex items-center justify-center">
+                  <Check size={14} className="text-white" />
+                </span>
+              )}
               <div className="flex items-start gap-3">
                 <span className="text-[32px] leading-none shrink-0">{meal.emoji}</span>
                 <div className="flex-1 min-w-0">
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between pr-6">
                     <p className="text-sm font-medium text-[#222222]">{meal.name}</p>
                     <span className="text-sm font-semibold text-[#222222] shrink-0 ml-2">
                       €{meal.price.toFixed(2)}
@@ -379,22 +391,9 @@ function MealsTab({ segment, passengers, segmentExtras, segmentId }) {
                       {t("extras.popular")}
                     </span>
                   )}
-                  <div className="mt-3">
-                    <button
-                      onClick={() => toggleMeal(segmentId, activePax, meal.id)}
-                      className={cn(
-                        "text-xs font-semibold rounded-full px-3 py-1.5 transition-all cursor-pointer",
-                        isSelected
-                          ? "bg-[#1C9218]/10 text-[#1C9218] hover:bg-[#1C9218]/20"
-                          : "bg-[#0A82DF]/10 text-[#0A82DF] hover:bg-[#0A82DF]/20"
-                      )}
-                    >
-                      {isSelected ? `${t("extras.selected")} ✓` : t("extras.add")}
-                    </button>
-                  </div>
                 </div>
               </div>
-            </div>
+            </button>
           );
         })}
       </div>
