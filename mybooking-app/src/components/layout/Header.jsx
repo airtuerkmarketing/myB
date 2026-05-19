@@ -4,7 +4,7 @@ import { Copy, Check } from "lucide-react";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { useBooking } from "../../context/BookingContext";
 import { useTranslation } from "../../hooks/useTranslation";
-import { toast } from "@/hooks/useToast";
+import { copyToast } from "@/components/ui/CopyToast";
 
 function Logo() {
   return (
@@ -36,7 +36,7 @@ function CopyRef({ refNumber }) {
   const handleCopy = () => {
     navigator.clipboard.writeText(refNumber);
     setCopied(true);
-    toast({ title: "Kopiert!", description: `${refNumber}`, variant: "default" });
+    copyToast(t("overview.ref"), refNumber);
     setTimeout(() => setCopied(false), 2000);
   };
 

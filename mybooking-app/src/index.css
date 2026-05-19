@@ -43,6 +43,8 @@
   --animate-shake: shake 0.5s ease-in-out;
   --animate-skeleton: skeleton-shimmer 1.5s ease-in-out infinite;
   --animate-bounce-in: bounce-in 0.4s ease-out both;
+  --animate-toast-in: toast-in 0.35s cubic-bezier(0.2, 0.9, 0.3, 1.0) both;
+  --animate-toast-out: toast-out 0.25s ease-in both;
 }
 
 :root {
@@ -197,6 +199,16 @@
   60%  { transform: scale(1.15); }
   80%  { transform: scale(0.95); }
   100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes toast-in {
+  from { opacity: 0; transform: translateY(-14px) scale(0.96); filter: blur(8px); }
+  to   { opacity: 1; transform: translateY(0) scale(1); filter: blur(0px); }
+}
+
+@keyframes toast-out {
+  from { opacity: 1; transform: translateY(0) scale(1); filter: blur(0px); }
+  to   { opacity: 0; transform: translateY(-10px) scale(0.98); filter: blur(6px); }
 }
 
 .animate-shimmer {
