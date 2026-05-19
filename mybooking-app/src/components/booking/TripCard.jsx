@@ -435,7 +435,7 @@ function DesktopPassengers({ passengers, segment, booking }) {
 
 // ─── Action Buttons ─────────────────────────────
 
-function SegmentActions({ segment }) {
+function SegmentActions({ segment, onAddExtras }) {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const summary = getSegmentCheckinSummary(segment);
@@ -451,6 +451,8 @@ function SegmentActions({ segment }) {
       navigate(`/boardingpass/${segment.id}`);
     }
   };
+
+  const handleExtras = () => onAddExtras?.(segment.id);
 
   return (
     <>
@@ -470,7 +472,10 @@ function SegmentActions({ segment }) {
         </button>
         <div className="flex-1" />
         {showExtras && (
-          <button className="shrink-0 h-9 px-4 bg-[#0A82DF] text-white text-xs font-semibold rounded-[10px] flex items-center gap-1.5 whitespace-nowrap hover:bg-[#0B6AB2] active:bg-[#06528A] transition-colors cursor-pointer">
+          <button
+            onClick={handleExtras}
+            className="shrink-0 h-9 px-4 bg-[#0A82DF] text-white text-xs font-semibold rounded-[10px] flex items-center gap-1.5 whitespace-nowrap hover:bg-[#0B6AB2] active:bg-[#06528A] transition-colors cursor-pointer"
+          >
             <Plus size={14} />
             {t("overview.addExtras")}
           </button>
@@ -492,7 +497,10 @@ function SegmentActions({ segment }) {
         )}
 
         {showExtras && (
-          <button className="w-full h-[46px] bg-[#0A82DF] text-white font-semibold text-sm rounded-[10px] flex items-center justify-center gap-2 hover:bg-[#0B6AB2] active:bg-[#06528A] transition-colors cursor-pointer">
+          <button
+            onClick={handleExtras}
+            className="w-full h-[46px] bg-[#0A82DF] text-white font-semibold text-sm rounded-[10px] flex items-center justify-center gap-2 hover:bg-[#0B6AB2] active:bg-[#06528A] transition-colors cursor-pointer"
+          >
             <Plus size={16} />
             {t("overview.addExtras")}
           </button>
@@ -519,7 +527,7 @@ function SegmentActions({ segment }) {
 
 // ─── Segment Block ──────────────────────────────
 
-function SegmentBlock({ segment, booking }) {
+function SegmentBlock({ segment, booking, onAddExtras }) {
   const passengers = mergePassengers(booking, segment);
   const isCancelled = segment.status === "cancelled";
   const isPartial = segment.status === "partially-checked-in";
@@ -534,7 +542,7 @@ function SegmentBlock({ segment, booking }) {
         {isPartial && <PartialCheckinDetail segment={segment} booking={booking} />}
         {isCancelled && <CancelledDetail />}
         <MobilePassengers passengers={passengers} booking={booking} />
-        <SegmentActions segment={segment} />
+        <SegmentActions segment={segment} onAddExtras={onAddExtras} />
       </div>
 
       {/* Desktop */}
@@ -549,7 +557,7 @@ function SegmentBlock({ segment, booking }) {
           </div>
           <DesktopPassengers passengers={passengers} segment={segment} booking={booking} />
         </div>
-        <SegmentActions segment={segment} />
+        <SegmentActions segment={segment} onAddExtras={onAddExtras} />
       </div>
     </div>
   );
@@ -557,7 +565,7 @@ function SegmentBlock({ segment, booking }) {
 
 // ─── Main Component ─────────────────────────────
 
-export default function TripCard({ trip, booking }) {
+export default function TripCard({ trip, booking, onAddExtras }) {
   const isMultiSegment = trip.segments.length > 1;
 
   return (
@@ -569,7 +577,7 @@ export default function TripCard({ trip, booking }) {
           {i > 0 && (
             <LayoverDivider prevSegment={trip.segments[i - 1]} nextSegment={seg} />
           )}
-          <SegmentBlock segment={seg} booking={booking} />
+          <SegmentBlock segment={seg} booking={booking} onAddExtras={onAddExtras} />
         </Fragment>
       ))}
     </div>

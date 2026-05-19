@@ -1,7 +1,9 @@
 import { createContext, useContext, useState, useMemo, useCallback } from "react";
-import { scenarios, defaultScenario, getSegmentCheckinSummary } from "../data/dummyData";
+import { scenarios, defaultScenario, getSegmentCheckinSummary, extrasCatalog } from "../data/dummyData";
 
 const BookingContext = createContext(null);
+
+const emptySegExtras = () => ({ luggage: {}, seats: {}, meals: {} });
 
 export function BookingProvider({ children }) {
   const [activeScenario, setActiveScenario] = useState(defaultScenario);
@@ -39,17 +41,86 @@ export function BookingProvider({ children }) {
     });
   }, []);
 
+  const getSegmentExtras = useCallback(
+    (segmentId) => selectedExtras[segmentId] ?? emptySegExtras(),
+    [selectedExtras]
+  );
+
+  const setLuggage = useCallback((segmentId, passengerId, luggageId) => {
+    setSelectedExtras((prev) => {
+      const seg = prev[segmentId] ?? emptySegExtras();
+      const luggage = { ...seg.luggage };
+      if (luggageId) luggage[passengerId] = luggageId;
+      else delete luggage[passengerId];
+      return { ...prev, [segmentId]: { ...seg, luggage } };
+    });
+  }, []);
+
+  const setSeat = useCallback((segmentId, passengerId, seatCode) => {
+    setSelectedExtras((prev) => {
+      const seg = prev[segmentId] ?? emptySegExtras();
+      const seats = { ...seg.seats };
+      if (seatCode) seats[passengerId] = seatCode;
+      else delete seats[passengerId];
+      return { ...prev, [segmentId]: { ...seg, seats } };
+    });
+  }, []);
+
+  const toggleMeal = useCallback((segmentId, passengerId, mealId) => {
+    setSelectedExtras((prev) => {
+      const seg = prev[segmentId] ?? emptySegExtras();
+      const current = seg.meals[passengerId] ?? [];
+      const has = current.includes(mealId);
+      const updated = has ? current.filter((id) => id !== mealId) : [...current, mealId];
+      const meals = { ...seg.meals };
+      if (updated.length === 0) delete meals[passengerId];
+      else meals[passengerId] = updated;
+      return { ...prev, [segmentId]: { ...seg, meals } };
+    });
+  }, []);
+
+  const getSegmentExtrasTotal = useCallback(
+    (segmentId) => {
+      const ext = selectedExtras[segmentId];
+      if (!ext) return 0;
+      let total = 0;
+      for (const lugId of Object.values(ext.luggage)) {
+        const item = extrasCatalog.luggage.find((l) => l.id === lugId);
+        if (item) total += item.price;
+      }
+      for (const seatCode of Object.values(ext.seats)) {
+        const row = parseInt(seatCode, 10);
+        if (row >= 12 && row <= 13) total += extrasCatalog.seatPricing.exit;
+        else if (row <= 5) total += extrasCatalog.seatPricing.front;
+        else total += extrasCatalog.seatPricing.standard;
+      }
+      for (const mealIds of Object.values(ext.meals)) {
+        for (const mId of mealIds) {
+          const meal = extrasCatalog.meals.find((m) => m.id === mId);
+          if (meal) total += meal.price;
+        }
+      }
+      return total;
+    },
+    [selectedExtras]
+  );
+
   const value = useMemo(
     () => ({
       activeScenario,
       scenarioList: Object.values(scenarios).map((s) => ({ id: s.id, label: s.label })),
       booking,
       selectedExtras,
-      setSelectedExtras,
       switchScenario,
       checkInPassengers,
+      getSegmentExtras,
+      setLuggage,
+      setSeat,
+      toggleMeal,
+      getSegmentExtrasTotal,
     }),
-    [activeScenario, booking, selectedExtras, switchScenario, checkInPassengers]
+    [activeScenario, booking, selectedExtras, switchScenario, checkInPassengers,
+     getSegmentExtras, setLuggage, setSeat, toggleMeal, getSegmentExtrasTotal]
   );
 
   return (

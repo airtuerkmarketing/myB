@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import { Info } from "lucide-react";
 import { useTranslation } from "../hooks/useTranslation";
 import { useBooking } from "../context/BookingContext";
@@ -6,6 +6,7 @@ import { flattenSegments, sortTrips, crossSellOffers } from "../data/dummyData";
 import TripCard from "../components/booking/TripCard";
 import CrossSellCarousel from "../components/crosssell/CrossSellCarousel";
 import { SkeletonCard } from "../components/ui/Skeleton";
+import ExtrasDrawer from "../components/extras/ExtrasDrawer";
 
 function MetaLine() {
   const { t } = useTranslation();
@@ -51,8 +52,10 @@ function CheckinFeeHint() {
 export default function BookingOverview() {
   const { booking } = useBooking();
   const [isLoading, setIsLoading] = useState(true);
+  const [extrasSegmentId, setExtrasSegmentId] = useState(null);
 
   const sortedTrips = useMemo(() => sortTrips(booking.trips), [booking]);
+  const allSegments = useMemo(() => flattenSegments(booking), [booking]);
 
   const hasCheckinOpen = useMemo(
     () =>
@@ -61,6 +64,14 @@ export default function BookingOverview() {
       ),
     [booking]
   );
+
+  const extrasSegment = useMemo(
+    () => allSegments.find((s) => s.id === extrasSegmentId) ?? null,
+    [allSegments, extrasSegmentId]
+  );
+
+  const handleAddExtras = useCallback((segId) => setExtrasSegmentId(segId), []);
+  const handleCloseExtras = useCallback(() => setExtrasSegmentId(null), []);
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoading(false), 800);
@@ -86,7 +97,7 @@ export default function BookingOverview() {
                   className="animate-fade-in-up"
                   style={{ animationDelay: `${index * 80}ms` }}
                 >
-                  <TripCard trip={trip} booking={booking} />
+                  <TripCard trip={trip} booking={booking} onAddExtras={handleAddExtras} />
                 </div>
               ))}
             </div>
@@ -106,6 +117,12 @@ export default function BookingOverview() {
           </>
         )}
       </div>
+
+      <ExtrasDrawer
+        open={!!extrasSegmentId}
+        onClose={handleCloseExtras}
+        segment={extrasSegment}
+      />
     </main>
   );
 }
