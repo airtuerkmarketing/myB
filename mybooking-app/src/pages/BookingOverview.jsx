@@ -1,32 +1,33 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Briefcase, Info } from "lucide-react";
 import { useTranslation } from "../hooks/useTranslation";
-import { bookingData } from "../data/dummyData";
+import { scenarios, defaultScenario, flattenSegments, mergePassengers, crossSellOffers } from "../data/dummyData";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import FlightCard from "../components/booking/FlightCard";
 import CrossSellCarousel from "../components/crosssell/CrossSellCarousel";
 import { SkeletonCard } from "../components/ui/Skeleton";
 
+const booking = scenarios[defaultScenario].booking;
+
 function PageHeader() {
   const { t } = useTranslation();
+  const destination = booking.trips[0]?.destination?.city ?? "";
 
   return (
     <div className="flex items-start justify-between mt-2 mb-8">
-      {/* Left: title + countdown */}
       <div>
         <h1 className="text-2xl md:text-[28px] font-bold text-foreground tracking-tight">
           {t("overview.title")}
         </h1>
         <p className="text-sm text-muted-foreground mt-1">
-          {t("overview.daysUntil", { days: 5, destination: "Heraklion" }).split("5")[0]}
+          {t("overview.daysUntil", { days: 5, destination }).split("5")[0]}
           <span className="inline-flex items-center bg-amber-50 text-amber-700 rounded-md px-1.5 py-0.5 font-semibold text-xs mx-0.5">
             5
           </span>
-          {t("overview.daysUntil", { days: 5, destination: "Heraklion" }).split("5").slice(1).join("5")}
+          {t("overview.daysUntil", { days: 5, destination }).split("5").slice(1).join("5")}
         </p>
       </div>
 
-      {/* Right: help bubble + avatar (desktop only) */}
       <div className="hidden md:flex items-center gap-3 shrink-0">
         <div className="bg-muted rounded-2xl rounded-br-sm p-3 max-w-[200px]">
           <p className="text-xs font-medium text-foreground">
@@ -47,21 +48,24 @@ function PageHeader() {
 
 function ReferenceBar() {
   const { t } = useTranslation();
+  const firstPNR = flattenSegments(booking)[0]?.airlinePNR;
 
   return (
     <div className="flex items-center gap-4 text-xs text-muted-foreground mb-5">
       <span>
         {t("overview.ref")}:{" "}
         <span className="font-mono font-semibold text-foreground">
-          {bookingData.referenceNumber}
+          {booking.airtuerkRef}
         </span>
       </span>
-      <span>
-        {t("overview.airlineRef")}:{" "}
-        <span className="font-mono font-semibold text-foreground">
-          {bookingData.airlineRef}
+      {firstPNR && (
+        <span>
+          {t("overview.airlineRef")}:{" "}
+          <span className="font-mono font-semibold text-foreground">
+            {firstPNR}
+          </span>
         </span>
-      </span>
+      )}
     </div>
   );
 }
@@ -98,6 +102,8 @@ function CabinBaggageInfo() {
 export default function BookingOverview() {
   const [isLoading, setIsLoading] = useState(true);
 
+  const segments = useMemo(() => flattenSegments(booking), []);
+
   useEffect(() => {
     const timer = setTimeout(() => setIsLoading(false), 800);
     return () => clearTimeout(timer);
@@ -119,37 +125,34 @@ export default function BookingOverview() {
           </div>
         ) : (
           <>
-            {/* Flight cards */}
             <div className="flex flex-col gap-5">
-              {bookingData.flights.map((flight, index) => (
+              {segments.map((segment, index) => (
                 <div
-                  key={flight.id}
+                  key={segment.id}
                   className="animate-fade-in-up"
                   style={{ animationDelay: `${index * 80}ms` }}
                 >
                   <FlightCard
-                    flight={flight}
-                    passengers={bookingData.passengers}
+                    segment={segment}
+                    passengers={mergePassengers(booking, segment)}
                   />
-                  {flight.status === "checkin-open" && <CheckinFeeHint />}
+                  {segment.status === "checkin-open" && <CheckinFeeHint />}
                 </div>
               ))}
             </div>
 
-            {/* Cabin baggage info */}
             <div
               className="animate-fade-in-up mt-6"
-              style={{ animationDelay: `${bookingData.flights.length * 80}ms` }}
+              style={{ animationDelay: `${segments.length * 80}ms` }}
             >
               <CabinBaggageInfo />
             </div>
 
-            {/* Cross-sell */}
             <div
               className="animate-fade-in-up"
-              style={{ animationDelay: `${(bookingData.flights.length + 1) * 80}ms` }}
+              style={{ animationDelay: `${(segments.length + 1) * 80}ms` }}
             >
-              <CrossSellCarousel offers={bookingData.crossSellOffers} />
+              <CrossSellCarousel offers={crossSellOffers} />
             </div>
           </>
         )}

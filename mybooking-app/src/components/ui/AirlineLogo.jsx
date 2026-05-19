@@ -26,6 +26,12 @@ const airlineConfig = {
     textColor: "#fff",
     domain: "flypgs.com",
   },
+  "Aegean Airlines": {
+    colors: ["#00205B", "#00205B"],
+    initials: "A3",
+    textColor: "#fff",
+    domain: "aegeanair.com",
+  },
 };
 
 const sizes = {

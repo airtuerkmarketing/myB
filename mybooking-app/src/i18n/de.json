@@ -19,6 +19,8 @@
     "checkinClosed": "Check-in geschlossen",
     "checkinStartsOn": "Check-in startet am {date}",
     "cancelled": "Flug wurde storniert",
+    "checkedIn": "Eingecheckt",
+    "partiallyCheckedIn": "{checked}/{total} eingecheckt",
     "passenger": "Passagier",
     "ticketNr": "Ticketnr.",
     "luggage": "Gepäck",

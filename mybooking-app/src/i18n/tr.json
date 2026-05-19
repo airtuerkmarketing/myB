@@ -19,6 +19,8 @@
     "checkinClosed": "Check-in kapandı",
     "checkinStartsOn": "Check-in {date} tarihinde başlıyor",
     "cancelled": "Uçuş iptal edildi",
+    "checkedIn": "Check-in yapıldı",
+    "partiallyCheckedIn": "{checked}/{total} check-in yapıldı",
     "passenger": "Yolcu",
     "ticketNr": "Bilet No.",
     "luggage": "Bagaj",

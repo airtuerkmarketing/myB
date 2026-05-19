@@ -1,5 +1,5 @@
 import { useState, useCallback, useMemo } from "react";
-import { bookingData } from "../data/dummyData";
+import { extrasCatalog } from "../data/dummyData";
 
 export function useExtras() {
   const [selectedExtras, setSelectedExtras] = useState({
@@ -74,31 +74,31 @@ export function useExtras() {
   }, []);
 
   const getTotalPrice = useMemo(() => {
-    const { luggage: luggageData, seats: seatsData, meals: mealsData } = bookingData.extras;
     let total = 0;
 
     for (const passengerId of Object.keys(selectedExtras.luggage)) {
       const items = selectedExtras.luggage[passengerId];
       for (const [extraId, qty] of Object.entries(items)) {
-        const item = luggageData.find((l) => l.id === extraId);
+        const item = extrasCatalog.luggage.find((l) => l.id === extraId);
         if (item) total += item.price * qty;
       }
     }
 
     for (const seatCode of Object.values(selectedExtras.seats)) {
       const row = parseInt(seatCode, 10);
-      if (seatsData.exitRows.includes(row)) {
-        total += seatsData.pricing.exit;
+      const { seatPricing } = extrasCatalog;
+      if (row >= 12 && row <= 13) {
+        total += seatPricing.exit;
       } else if (row <= 5) {
-        total += seatsData.pricing.front;
+        total += seatPricing.front;
       } else {
-        total += seatsData.pricing.standard;
+        total += seatPricing.standard;
       }
     }
 
     for (const passengerMeals of Object.values(selectedExtras.meals)) {
       for (const mealId of passengerMeals) {
-        const meal = mealsData.find((m) => m.id === mealId);
+        const meal = extrasCatalog.meals.find((m) => m.id === mealId);
         if (meal) total += meal.price;
       }
     }

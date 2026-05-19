@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Search, Copy, Check, Sun, Moon, Accessibility } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import LanguageSwitcher from "./LanguageSwitcher";
-import { bookingData } from "../../data/dummyData";
+import { scenarios, defaultScenario } from "../../data/dummyData";
 import { useTheme } from "../../context/ThemeContext";
 import { toast } from "@/hooks/useToast";
 
@@ -102,7 +102,7 @@ function AppHeader() {
           <div className="hidden sm:block">
             <LanguageSwitcher />
           </div>
-          <CopyRef refNumber={bookingData.referenceNumber} />
+          <CopyRef refNumber={scenarios[defaultScenario].booking.airtuerkRef} />
         </div>
       </div>
     </header>
