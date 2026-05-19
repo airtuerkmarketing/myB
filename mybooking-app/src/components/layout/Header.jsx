@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Search, Copy, Check, Sun, Moon, Accessibility } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import LanguageSwitcher from "./LanguageSwitcher";
-import { scenarios, defaultScenario } from "../../data/dummyData";
+import { useBooking } from "../../context/BookingContext";
 import { useTheme } from "../../context/ThemeContext";
 import { toast } from "@/hooks/useToast";
 
@@ -87,6 +87,8 @@ function CopyRef({ refNumber }) {
 }
 
 function AppHeader() {
+  const { booking } = useBooking();
+
   return (
     <header className="sticky top-0 z-50 backdrop-blur-xl bg-background/80 border-b border-border/50 px-4 md:px-8 py-3">
       <div className="max-w-5xl mx-auto flex items-center justify-between">
@@ -102,7 +104,7 @@ function AppHeader() {
           <div className="hidden sm:block">
             <LanguageSwitcher />
           </div>
-          <CopyRef refNumber={scenarios[defaultScenario].booking.airtuerkRef} />
+          <CopyRef refNumber={booking.airtuerkRef} />
         </div>
       </div>
     </header>

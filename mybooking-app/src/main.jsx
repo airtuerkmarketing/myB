@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import { HashRouter } from "react-router-dom";
 import { LanguageProvider } from "./context/LanguageContext";
 import { ThemeProvider } from "./context/ThemeContext";
+import { BookingProvider } from "./context/BookingContext";
 import { Toaster } from "./components/ui/toaster";
 import App from "./App";
 import OfflineBanner from "./components/ui/OfflineBanner";
@@ -13,9 +14,11 @@ createRoot(document.getElementById("root")).render(
     <HashRouter>
       <ThemeProvider>
         <LanguageProvider>
-          <OfflineBanner />
-          <App />
-          <Toaster />
+          <BookingProvider>
+            <OfflineBanner />
+            <App />
+            <Toaster />
+          </BookingProvider>
         </LanguageProvider>
       </ThemeProvider>
     </HashRouter>

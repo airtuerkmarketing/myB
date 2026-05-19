@@ -1,16 +1,16 @@
 import { useState, useEffect, useMemo } from "react";
 import { Briefcase, Info } from "lucide-react";
 import { useTranslation } from "../hooks/useTranslation";
-import { scenarios, defaultScenario, flattenSegments, mergePassengers, crossSellOffers } from "../data/dummyData";
+import { useBooking } from "../context/BookingContext";
+import { flattenSegments, mergePassengers, crossSellOffers } from "../data/dummyData";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import FlightCard from "../components/booking/FlightCard";
 import CrossSellCarousel from "../components/crosssell/CrossSellCarousel";
 import { SkeletonCard } from "../components/ui/Skeleton";
 
-const booking = scenarios[defaultScenario].booking;
-
 function PageHeader() {
   const { t } = useTranslation();
+  const { booking } = useBooking();
   const destination = booking.trips[0]?.destination?.city ?? "";
 
   return (
@@ -48,6 +48,7 @@ function PageHeader() {
 
 function ReferenceBar() {
   const { t } = useTranslation();
+  const { booking } = useBooking();
   const firstPNR = flattenSegments(booking)[0]?.airlinePNR;
 
   return (
@@ -100,9 +101,10 @@ function CabinBaggageInfo() {
 }
 
 export default function BookingOverview() {
+  const { booking } = useBooking();
   const [isLoading, setIsLoading] = useState(true);
 
-  const segments = useMemo(() => flattenSegments(booking), []);
+  const segments = useMemo(() => flattenSegments(booking), [booking]);
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoading(false), 800);

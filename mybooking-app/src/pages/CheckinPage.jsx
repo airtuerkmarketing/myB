@@ -1,6 +1,7 @@
 import { useState, useMemo, useCallback } from "react";
 import { useParams } from "react-router-dom";
-import { scenarios, defaultScenario, flattenSegments, mergePassengers, extrasCatalog } from "../data/dummyData";
+import { useBooking } from "../context/BookingContext";
+import { flattenSegments, mergePassengers, extrasCatalog } from "../data/dummyData";
 import CheckinHeader from "../components/checkin/CheckinHeader";
 import StepIndicator from "../components/checkin/StepIndicator";
 import PassengerSelect from "../components/checkin/PassengerSelect";
@@ -9,14 +10,13 @@ import CheckinFooter from "../components/checkin/CheckinFooter";
 import CheckinSuccess from "../components/checkin/CheckinSuccess";
 import { toast } from "@/hooks/useToast";
 
-const booking = scenarios[defaultScenario].booking;
-
 export default function CheckinPage() {
-  const { flightId } = useParams();
+  const { segmentId } = useParams();
+  const { booking, checkInPassengers } = useBooking();
 
-  const segments = useMemo(() => flattenSegments(booking), []);
-  const segment = segments.find((s) => s.id === flightId) ?? segments[0];
-  const passengers = useMemo(() => mergePassengers(booking, segment), [segment]);
+  const segments = useMemo(() => flattenSegments(booking), [booking]);
+  const segment = segments.find((s) => s.id === segmentId) ?? segments[0];
+  const passengers = useMemo(() => mergePassengers(booking, segment), [booking, segment]);
 
   const [selectedPassengers, setSelectedPassengers] = useState([
     passengers[0]?.id,
@@ -68,6 +68,7 @@ export default function CheckinPage() {
   const handleCheckin = () => {
     setIsProcessing(true);
     setTimeout(() => {
+      checkInPassengers(segment.id, selectedPassengers);
       setIsProcessing(false);
       setIsSuccess(true);
       toast({ title: "Check-in erfolgreich!", variant: "success" });
