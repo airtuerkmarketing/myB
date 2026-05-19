@@ -43,7 +43,7 @@ export default function CrossSellCarousel({ offers }) {
         {t("crosssell.title")}
       </h2>
 
-      <div className="relative mt-4">
+      <div className="relative mt-5">
         <div
           ref={scrollRef}
           className="-mx-4 px-4 flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 scrollbar-hide"
@@ -55,25 +55,23 @@ export default function CrossSellCarousel({ offers }) {
           ))}
         </div>
 
-        {/* Desktop arrow */}
         {canScrollRight && (
           <button
             onClick={scrollNext}
-            className="hidden md:flex absolute -right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white border border-[#EBEBEB] shadow-elevation-01 items-center justify-center hover:shadow-elevation-03 hover:border-[#D4D4D4] transition-all cursor-pointer z-10"
+            className="hidden md:flex absolute -right-3 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/90 backdrop-blur-sm shadow-elevation-01 items-center justify-center hover:bg-white transition-all cursor-pointer z-10"
           >
             <ChevronRight size={18} className="text-[#222222]" />
           </button>
         )}
       </div>
 
-      {/* Dots */}
       {offers.length > 1 && (
-        <div className="flex justify-center gap-1.5 mt-3">
+        <div className="flex justify-center gap-1.5 mt-4">
           {offers.map((_, i) => (
             <div
               key={i}
               className={cn(
-                "h-1.5 rounded-full transition-all duration-200",
+                "h-1.5 rounded-full transition-all duration-300",
                 i === activeIndex ? "bg-[#222222] w-5" : "bg-[#D4D4D4] w-1.5"
               )}
             />
