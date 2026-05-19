@@ -525,6 +525,8 @@ const destinationNames = {
   IST: "Istanbul", FRA: "Frankfurt", MUC: "München", DUS: "Düsseldorf",
 };
 
+const csImg = (name) => `${import.meta.env.BASE_URL}crosssell/${name}`;
+
 const offerPool = {
   carRental: (dest, code) => ({
     id: "cs-car", icon: "car",
@@ -532,15 +534,15 @@ const offerPool = {
     subtitle: `Flexible Mobilität ab €19/Tag.`,
     cta: "Ansehen", provider: "mietwagen.de",
     gradient: ["#0F172A", "#1E3A5F"],
-    image: "https://images.unsplash.com/photo-1502877338535-766e1452684a?w=800&q=80&auto=format",
+    image: csImg("63.jpg"),
   }),
   hotel: (dest) => ({
     id: "cs-hotel", icon: "hotel",
     title: `Hotels in ${dest}`,
     subtitle: "Ausgewählte Hotels mit kostenloser Stornierung.",
-    cta: "Suchen", provider: "Booking.com",
+    cta: "Suchen", provider: "atbeds.com",
     gradient: ["#1E40AF", "#3B82F6"],
-    image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80&auto=format",
+    image: csImg("78.jpg"),
   }),
   activities: (dest) => ({
     id: "cs-activities", icon: "activities",
@@ -548,7 +550,7 @@ const offerPool = {
     subtitle: "Touren, Ausflüge und Aktivitäten vor Ort.",
     cta: "Entdecken", provider: "GetYourGuide",
     gradient: ["#7C3AED", "#A78BFA"],
-    image: "https://images.unsplash.com/photo-1530841377377-3ff06c0ca713?w=800&q=80&auto=format",
+    image: csImg("32.jpg"),
   }),
   sunPriority: () => ({
     id: "cs-sunpriority", icon: "priority",
@@ -556,15 +558,15 @@ const offerPool = {
     subtitle: "Als Erster an Bord und entspannter reisen.",
     cta: "Hinzufügen", provider: "SunExpress",
     gradient: ["#EA580C", "#F97316"],
-    image: "https://images.unsplash.com/photo-1436491865332-7a61a109db05?w=800&q=80&auto=format",
+    image: csImg("85.jpg"),
   }),
   insurance: () => ({
     id: "cs-insurance", icon: "insurance",
     title: "Reiseversicherung",
     subtitle: "Stornoschutz und medizinische Absicherung.",
-    cta: "Absichern", provider: "HanseMerkur",
+    cta: "Absichern", provider: "flex14",
     gradient: ["#065F46", "#10B981"],
-    image: "https://images.unsplash.com/photo-1488646472618-a1b355d1a03e?w=800&q=80&auto=format",
+    image: csImg("80.jpg"),
   }),
 };
 
