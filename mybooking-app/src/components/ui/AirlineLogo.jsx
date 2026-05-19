@@ -1,38 +1,15 @@
-import { useState, memo } from "react";
+import { memo } from "react";
 import { cn } from "@/lib/utils";
 
 const airlineConfig = {
-  "SunExpress": {
-    colors: ["#FFB800", "#E31E24"],
-    initials: "XQ",
-    textColor: "#fff",
-    domain: "sunexpress.com",
-  },
-  "Lufthansa": {
-    colors: ["#05164D", "#05164D"],
-    initials: "LH",
-    textColor: "#FFD700",
-    domain: "lufthansa.com",
-  },
-  "Turkish Airlines": {
-    colors: ["#C70A0C", "#C70A0C"],
-    initials: "TK",
-    textColor: "#fff",
-    domain: "turkishairlines.com",
-  },
-  "Pegasus": {
-    colors: ["#FFB800", "#1A3C6E"],
-    initials: "PC",
-    textColor: "#fff",
-    domain: "flypgs.com",
-  },
-  "Aegean Airlines": {
-    colors: ["#00205B", "#00205B"],
-    initials: "A3",
-    textColor: "#fff",
-    domain: "aegeanair.com",
-  },
+  "SunExpress": { initials: "XQ", code: "XQ", colors: ["#FFB800", "#E31E24"], textColor: "#fff" },
+  "Lufthansa": { initials: "LH", code: "LH", colors: ["#05164D", "#05164D"], textColor: "#FFD700" },
+  "Turkish Airlines": { initials: "TK", code: "TK", colors: ["#C70A0C", "#C70A0C"], textColor: "#fff" },
+  "Pegasus": { initials: "PC", code: "PC", colors: ["#FFB800", "#1A3C6E"], textColor: "#fff" },
+  "Aegean Airlines": { initials: "A3", code: "A3", colors: ["#00205B", "#00205B"], textColor: "#fff" },
 };
+
+const localLogoCodes = new Set(["XQ", "LH", "TK", "AJ", "EK", "TP", "WA", "XR"]);
 
 const sizes = {
   sm: { box: 28, font: 10 },
@@ -41,17 +18,17 @@ const sizes = {
 };
 
 export const AirlineLogo = memo(function AirlineLogo({ airline, size = "md", className }) {
-  const [imgError, setImgError] = useState(false);
   const config = airlineConfig[airline] || {
     colors: ["#6B7280", "#6B7280"],
     initials: airline?.slice(0, 2).toUpperCase() || "??",
+    code: airline?.slice(0, 2).toUpperCase() || null,
     textColor: "#fff",
-    domain: null,
   };
 
   const { box, font } = sizes[size] || sizes.md;
-  const logoUrl = config.domain
-    ? `https://logo.clearbit.com/${config.domain}`
+  const hasLocalLogo = localLogoCodes.has(config.code);
+  const logoUrl = hasLocalLogo
+    ? `${import.meta.env.BASE_URL}Airline Logos/${config.code}.svg`
     : null;
 
   return (
@@ -59,13 +36,12 @@ export const AirlineLogo = memo(function AirlineLogo({ airline, size = "md", cla
       className={cn("relative shrink-0 rounded-full overflow-hidden", className)}
       style={{ width: box, height: box }}
     >
-      {logoUrl && !imgError ? (
+      {logoUrl ? (
         <img
           src={logoUrl}
           alt={airline}
           loading="lazy"
-          className="h-full w-full rounded-full object-cover border border-border/30"
-          onError={() => setImgError(true)}
+          className="h-full w-full rounded-full object-cover"
         />
       ) : (
         <div
