@@ -439,12 +439,8 @@ function DesktopPassengers({ passengers, segment, booking }) {
 function SegmentActions({ segment, onAddExtras }) {
   const { t } = useTranslation();
   const { getSegmentExtras } = useBooking();
-  const navigate = useNavigate();
-  const summary = getSegmentCheckinSummary(segment);
-  const cta = getSmartCTA(segment, summary, t);
 
   const showExtras = !["cancelled", "checkin-closed"].includes(segment.status);
-  const showMobileCTA = cta?.clickable;
 
   const extrasCount = useMemo(() => {
     const ext = getSegmentExtras(segment.id);
@@ -458,14 +454,6 @@ function SegmentActions({ segment, onAddExtras }) {
     for (const mealIds of Object.values(ext.meals)) c += mealIds.length;
     return c;
   }, [getSegmentExtras, segment.id]);
-
-  const handleCTA = () => {
-    if (!cta?.clickable) return;
-    if (cta.action === "checkin") navigate(`/checkin/${segment.id}`);
-    else if (cta.action === "boardingpass") {
-      navigate(`/boardingpass/${segment.id}`);
-    }
-  };
 
   const handleExtras = () => onAddExtras?.(segment.id);
 
@@ -502,20 +490,8 @@ function SegmentActions({ segment, onAddExtras }) {
         )}
       </div>
 
-      {/* Mobile */}
+      {/* Mobile — CTA already shown by SmartBadge above */}
       <div className="md:hidden px-5 pb-5 pt-3 flex flex-col gap-2.5">
-        {showMobileCTA && (
-          <button
-            onClick={handleCTA}
-            className={cn(
-              "w-full h-[46px] font-semibold text-sm rounded-[10px] transition-all cursor-pointer flex items-center justify-center",
-              cta.className
-            )}
-          >
-            {cta.label}
-          </button>
-        )}
-
         {showExtras && (
           <button
             onClick={handleExtras}
