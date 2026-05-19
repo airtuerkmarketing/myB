@@ -12,7 +12,7 @@ export default memo(function OfferCard({ offer }) {
       onKeyDown={(e) => e.key === "Enter" && alert(offer.cta)}
       className="min-w-[85vw] md:min-w-[340px] snap-center flex-shrink-0 rounded-[20px] md:rounded-[24px] overflow-hidden cursor-pointer group relative h-[280px] md:h-[340px]"
       style={{
-        boxShadow: "0 24px 70px rgba(15,23,42,0.14)",
+        boxShadow: "0 4px 20px rgba(0,0,0,0.08)",
         background: `linear-gradient(135deg, ${from}, ${to})`,
       }}
     >
