@@ -228,8 +228,7 @@ function SmartBadge({ segment }) {
     if (cta.action === "checkin") {
       navigate(`/checkin/${segment.id}`);
     } else if (cta.action === "boardingpass") {
-      const first = segment.passengerDetails.find((pd) => pd.checkedIn);
-      if (first) navigate(`/boardingpass/${segment.id}/${first.passengerId}`);
+      navigate(`/boardingpass/${segment.id}`);
     }
   };
 
@@ -449,8 +448,7 @@ function SegmentActions({ segment }) {
     if (!cta?.clickable) return;
     if (cta.action === "checkin") navigate(`/checkin/${segment.id}`);
     else if (cta.action === "boardingpass") {
-      const first = segment.passengerDetails.find((pd) => pd.checkedIn);
-      if (first) navigate(`/boardingpass/${segment.id}/${first.passengerId}`);
+      navigate(`/boardingpass/${segment.id}`);
     }
   };
 

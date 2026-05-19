@@ -399,11 +399,7 @@ function SuccessScreen({ names, flightNumber, segmentId, firstPassengerId }) {
 
       <div className="flex flex-col gap-3 w-full max-w-xs mt-8">
         <button
-          onClick={() => {
-            if (firstPassengerId) {
-              navigate(`/boardingpass/${segmentId}/${firstPassengerId}`);
-            }
-          }}
+          onClick={() => navigate(`/boardingpass/${segmentId}`)}
           className="w-full h-[46px] bg-[#0A82DF] text-white rounded-[10px] font-semibold text-sm flex items-center justify-center gap-2 hover:bg-[#0B6AB2] transition-colors cursor-pointer"
         >
           <CreditCard size={18} />

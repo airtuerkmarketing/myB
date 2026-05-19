@@ -30,6 +30,7 @@ export default function App() {
         />
         <Route path="/checkin/:segmentId" element={<CheckinPage />} />
         <Route path="/boardingpass/:segmentId/:passengerId" element={<BoardingPassPage />} />
+        <Route path="/boardingpass/:segmentId" element={<BoardingPassPage />} />
       </Routes>
       <ScenarioSwitcher />
     </>

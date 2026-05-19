@@ -122,6 +122,21 @@
     "selected": "Seçildi",
     "remove": "Kaldır"
   },
+  "boardingpass": {
+    "title": "Biniş Kartı",
+    "notFound": "Biniş kartı bulunamadı.",
+    "passenger": "Yolcu",
+    "seat": "Koltuk",
+    "gate": "Kapı",
+    "class": "Sınıf",
+    "luggage": "Bagaj",
+    "boarding": "Biniş",
+    "brightnessTip": "İpucu: Daha iyi tarama için ekran parlaklığınızı artırın",
+    "saveWallet": "Cüzdana Kaydet",
+    "downloadPdf": "PDF olarak indir",
+    "sendEmail": "E-posta ile gönder",
+    "share": "Paylaş"
+  },
   "crosssell": {
     "title": "Seyahatinden daha fazlasını al",
     "addNow": "Şimdi Ekle"

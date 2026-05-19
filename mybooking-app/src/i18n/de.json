@@ -122,6 +122,21 @@
     "selected": "Ausgewählt",
     "remove": "Entfernen"
   },
+  "boardingpass": {
+    "title": "Bordkarte",
+    "notFound": "Bordkarte nicht gefunden.",
+    "passenger": "Passagier",
+    "seat": "Sitz",
+    "gate": "Gate",
+    "class": "Klasse",
+    "luggage": "Gepäck",
+    "boarding": "Boarding",
+    "brightnessTip": "Tipp: Erhöhe die Display-Helligkeit für besseres Scannen",
+    "saveWallet": "In Wallet speichern",
+    "downloadPdf": "Als PDF laden",
+    "sendEmail": "Per E-Mail senden",
+    "share": "Teilen"
+  },
   "crosssell": {
     "title": "Mehr aus deiner Reise machen",
     "addNow": "Jetzt Hinzufügen"

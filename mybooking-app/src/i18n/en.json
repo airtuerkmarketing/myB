@@ -122,6 +122,21 @@
     "selected": "Selected",
     "remove": "Remove"
   },
+  "boardingpass": {
+    "title": "Boarding Pass",
+    "notFound": "Boarding pass not found.",
+    "passenger": "Passenger",
+    "seat": "Seat",
+    "gate": "Gate",
+    "class": "Class",
+    "luggage": "Luggage",
+    "boarding": "Boarding",
+    "brightnessTip": "Tip: Increase your screen brightness for better scanning",
+    "saveWallet": "Save to Wallet",
+    "downloadPdf": "Download as PDF",
+    "sendEmail": "Send via email",
+    "share": "Share"
+  },
   "crosssell": {
     "title": "Get more out of your trip",
     "addNow": "Add Now"
