@@ -1,4 +1,7 @@
 {
+  "common": {
+    "and": "and"
+  },
   "landing": {
     "title1": "Your",
     "highlight": "Flight",
@@ -40,7 +43,21 @@
     "airlineRef": "Airline PNR",
     "ref": "airtuerk Reference",
     "helpAvatar": "Need help with check-in?",
-    "helpAvatarLink": "Start a live chat"
+    "helpAvatarLink": "Start a live chat",
+    "checkinJustOpened": "Check in now — just opened!",
+    "onePassengerRemaining": "1 passenger still needs check-in",
+    "passengersRemaining": "{count} passengers still need check-in",
+    "viewBoardingPasses": "View boarding passes",
+    "checkinClosedAirport": "Check-in closed — check in at the airport",
+    "cancelledFlight": "Flight was cancelled",
+    "whatNow": "What now?",
+    "cancelledInfo": "Please contact your travel agency for rebooking or refund.",
+    "layover": "Layover in {city} · {duration}",
+    "infantLap": "Traveling on {name}'s lap",
+    "oneCheckedIn": "{name} is checked in.",
+    "manyCheckedIn": "{names} are checked in.",
+    "oneMissing": "{name} still needs check-in.",
+    "manyMissing": "{names} still need check-in."
   },
   "checkin": {
     "title": "Check-in",

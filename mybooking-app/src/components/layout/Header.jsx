@@ -71,16 +71,16 @@ function CopyRef({ refNumber }) {
   return (
     <button
       onClick={handleCopy}
-      className="flex items-center gap-2 bg-muted rounded-lg px-3 py-1.5 text-xs font-mono cursor-pointer hover:bg-accent transition-colors"
+      className="flex items-center gap-2 bg-[#F7F7F7] border border-[#EBEBEB] rounded-[10px] px-3 py-1.5 text-xs font-mono cursor-pointer hover:bg-[#F0F0F0] transition-colors"
     >
-      <span className="hidden sm:inline text-muted-foreground font-sans">
+      <span className="hidden sm:inline text-[#717171] font-sans">
         airtuerk Referenz
       </span>
-      <span className="font-semibold text-foreground">{refNumber}</span>
+      <span className="font-semibold text-[#222222]">{refNumber}</span>
       {copied ? (
-        <Check size={14} className="text-checkin-green" />
+        <Check size={14} className="text-[#1C9218]" />
       ) : (
-        <Copy size={14} className="text-muted-foreground" />
+        <Copy size={14} className="text-[#717171]" />
       )}
     </button>
   );
@@ -90,7 +90,7 @@ function AppHeader() {
   const { booking } = useBooking();
 
   return (
-    <header className="sticky top-0 z-50 backdrop-blur-xl bg-background/80 border-b border-border/50 px-4 md:px-8 py-3">
+    <header className="sticky top-0 z-50 backdrop-blur-xl bg-white/90 border-b border-[#EBEBEB] px-4 md:px-8 py-3">
       <div className="max-w-5xl mx-auto flex items-center justify-between">
         <Logo />
 

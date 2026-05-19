@@ -1,4 +1,7 @@
 {
+  "common": {
+    "and": "ve"
+  },
   "landing": {
     "title1": "Senin",
     "highlight": "Uçuş",
@@ -40,7 +43,21 @@
     "airlineRef": "Havayolu PNR",
     "ref": "airtuerk Referansı",
     "helpAvatar": "Check-in konusunda yardıma mı ihtiyacın var?",
-    "helpAvatarLink": "Canlı sohbet başlat"
+    "helpAvatarLink": "Canlı sohbet başlat",
+    "checkinJustOpened": "Şimdi check-in yap — yeni açıldı!",
+    "onePassengerRemaining": "1 yolcu henüz check-in yapmadı",
+    "passengersRemaining": "{count} yolcu henüz check-in yapmadı",
+    "viewBoardingPasses": "Biniş kartlarını göster",
+    "checkinClosedAirport": "Check-in kapandı — havalimanında check-in yapın",
+    "cancelledFlight": "Uçuş iptal edildi",
+    "whatNow": "Şimdi ne olacak?",
+    "cancelledInfo": "Lütfen yeniden rezervasyon veya iade için seyahat acentenize başvurun.",
+    "layover": "{city} aktarma · {duration} bekleme",
+    "infantLap": "{name} kucağında seyahat ediyor",
+    "oneCheckedIn": "{name} check-in yaptı.",
+    "manyCheckedIn": "{names} check-in yaptı.",
+    "oneMissing": "{name} henüz check-in yapmadı.",
+    "manyMissing": "{names} henüz check-in yapmadı."
   },
   "checkin": {
     "title": "Check-in",

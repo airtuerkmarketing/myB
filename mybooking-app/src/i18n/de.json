@@ -1,4 +1,7 @@
 {
+  "common": {
+    "and": "und"
+  },
   "landing": {
     "title1": "Dein",
     "highlight": "Flug",
@@ -40,7 +43,21 @@
     "airlineRef": "Airline PNR",
     "ref": "airtuerk Referenz",
     "helpAvatar": "Brauchst du Hilfe beim Check-in?",
-    "helpAvatarLink": "Starte einen Livechat"
+    "helpAvatarLink": "Starte einen Livechat",
+    "checkinJustOpened": "Jetzt einchecken — gerade geöffnet!",
+    "onePassengerRemaining": "1 Passagier noch einchecken",
+    "passengersRemaining": "{count} Passagiere noch einchecken",
+    "viewBoardingPasses": "Bordkarten anzeigen",
+    "checkinClosedAirport": "Check-in geschlossen — am Flughafen einchecken",
+    "cancelledFlight": "Flug wurde storniert",
+    "whatNow": "Was jetzt?",
+    "cancelledInfo": "Bitte kontaktiere dein Reisebüro für Umbuchung oder Erstattung.",
+    "layover": "Umstieg in {city} · {duration} Aufenthalt",
+    "infantLap": "Reist auf dem Schoß von {name}",
+    "oneCheckedIn": "{name} ist eingecheckt.",
+    "manyCheckedIn": "{names} sind eingecheckt.",
+    "oneMissing": "{name} fehlt noch.",
+    "manyMissing": "{names} fehlen noch."
   },
   "checkin": {
     "title": "Check-in",

@@ -553,8 +553,27 @@ export const mergePassengers = (booking, segment) =>
       seat: pd.seat,
       luggage: pd.luggage,
       checkedIn: pd.checkedIn,
+      boardingPass: pd.boardingPass,
       hasWheelchair: pax?.specialNeeds?.includes("wheelchair_assistance") ?? false,
+      linkedAdult: pax?.linkedAdult ?? null,
     };
+  });
+
+// ─── HELPER: Trips nach Status-Priorität sortieren ──
+const statusPriority = {
+  "partially-checked-in": 0,
+  "checkin-open": 1,
+  "checked-in": 2,
+  "checkin-upcoming": 3,
+  "checkin-closed": 4,
+  "cancelled": 5,
+};
+
+export const sortTrips = (trips) =>
+  [...trips].sort((a, b) => {
+    const aPri = Math.min(...a.segments.map((s) => statusPriority[s.status] ?? 99));
+    const bPri = Math.min(...b.segments.map((s) => statusPriority[s.status] ?? 99));
+    return aPri - bPri;
   });
 
 // ─── HELPER: Alle Segmente aus einem Booking flach ──
