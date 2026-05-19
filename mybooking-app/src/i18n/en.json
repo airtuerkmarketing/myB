@@ -11,7 +11,8 @@
     "surnamePlaceholder": "Last name",
     "cta": "Find Booking",
     "helpText": "Need help or can't find your booking?",
-    "helpLink": "Our team is here to help."
+    "helpLink": "Our team is here to help.",
+    "dropHint": "or drop your ticket PDF / photo here"
   },
   "overview": {
     "title": "Your Bookings at a Glance",

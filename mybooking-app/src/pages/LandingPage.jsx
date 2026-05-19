@@ -1,16 +1,44 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
+import { Upload, Check } from "lucide-react";
 import { useTranslation } from "../hooks/useTranslation";
+
+function ScanOverlay({ state }) {
+  if (state === "idle") return null;
+
+  return (
+    <div className="absolute inset-0 z-10 bg-white/95 backdrop-blur-sm rounded-[16px] flex flex-col items-center justify-center gap-3 animate-fade-in">
+      {state === "scanning" && (
+        <>
+          <div className="w-10 h-10 rounded-full border-2 border-[#0A82DF] border-t-transparent animate-spin" />
+          <span className="text-sm font-medium text-[#222222]">Scanning…</span>
+        </>
+      )}
+      {state === "success" && (
+        <>
+          <div className="w-10 h-10 rounded-full bg-[#E8F5E9] flex items-center justify-center animate-bounce-in">
+            <Check size={20} className="text-[#1C9218]" />
+          </div>
+          <span className="text-sm font-medium text-[#1C9218]">Done</span>
+        </>
+      )}
+    </div>
+  );
+}
 
 export default function LandingPage() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const formRef = useRef(null);
+  const fileInputRef = useRef(null);
 
   const [pnr, setPnr] = useState("");
   const [surname, setSurname] = useState("");
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
+  const [scanState, setScanState] = useState("idle");
+  const dragCounter = useRef(0);
 
   const handleSubmit = () => {
     const newErrors = {};
@@ -28,6 +56,61 @@ export default function LandingPage() {
     setErrors({});
     setIsLoading(true);
     setTimeout(() => navigate("/booking"), 300);
+  };
+
+  const simulateScan = useCallback(() => {
+    setErrors({});
+    setScanState("scanning");
+    setTimeout(() => {
+      setPnr("991356");
+      setSurname("Mustermann");
+      setScanState("success");
+      setTimeout(() => setScanState("idle"), 800);
+    }, 1200);
+  }, []);
+
+  const handleFile = useCallback(
+    (file) => {
+      if (!file) return;
+      const allowed = ["application/pdf", "image/png", "image/jpeg", "image/webp"];
+      if (!allowed.includes(file.type)) return;
+      simulateScan();
+    },
+    [simulateScan]
+  );
+
+  const handleDragEnter = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    dragCounter.current++;
+    setIsDragging(true);
+  };
+
+  const handleDragLeave = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    dragCounter.current--;
+    if (dragCounter.current === 0) setIsDragging(false);
+  };
+
+  const handleDragOver = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    dragCounter.current = 0;
+    setIsDragging(false);
+    const file = e.dataTransfer?.files?.[0];
+    handleFile(file);
+  };
+
+  const handleFileInput = (e) => {
+    const file = e.target.files?.[0];
+    handleFile(file);
+    e.target.value = "";
   };
 
   return (
@@ -50,12 +133,22 @@ export default function LandingPage() {
             </p>
           </div>
 
-          {/* Search Form — Airbnb Stacked Input */}
+          {/* Search Form */}
           <div className="mt-8 w-full animate-fade-in-up [animation-delay:200ms]">
             <div
               ref={formRef}
-              className="bg-white border border-[#EBEBEB] rounded-[16px] shadow-elevation-03 overflow-hidden"
+              className={`relative bg-white border rounded-[16px] shadow-elevation-03 overflow-hidden transition-colors ${
+                isDragging
+                  ? "border-[#0A82DF] border-dashed bg-[#F0F8FF]"
+                  : "border-[#EBEBEB]"
+              }`}
+              onDragEnter={handleDragEnter}
+              onDragLeave={handleDragLeave}
+              onDragOver={handleDragOver}
+              onDrop={handleDrop}
             >
+              <ScanOverlay state={scanState} />
+
               <input
                 type="text"
                 placeholder={t("landing.pnrPlaceholder")}
@@ -79,6 +172,25 @@ export default function LandingPage() {
                 className={`w-full border-0 rounded-none h-[52px] px-4 text-base text-[#222222] placeholder:text-[#B0B0B0] focus:bg-[#F7F7F7] outline-none transition-colors ${
                   errors.surname ? "bg-[#FFF5F5]" : ""
                 }`}
+              />
+
+              {/* Subtle drop hint */}
+              <button
+                type="button"
+                onClick={() => fileInputRef.current?.click()}
+                className="w-full flex items-center justify-center gap-1.5 border-t border-[#EBEBEB] px-4 py-2 cursor-pointer hover:bg-[#FAFAFA] transition-colors"
+              >
+                <Upload size={12} className="text-[#B0B0B0]" />
+                <span className="text-[11px] text-[#B0B0B0]">
+                  {t("landing.dropHint")}
+                </span>
+              </button>
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept=".pdf,.png,.jpg,.jpeg,.webp"
+                onChange={handleFileInput}
+                className="hidden"
               />
             </div>
 

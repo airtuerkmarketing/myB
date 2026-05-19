@@ -11,7 +11,8 @@
     "surnamePlaceholder": "Soyadı",
     "cta": "Rezervasyon Sorgula",
     "helpText": "Yardıma mı ihtiyacın var veya rezervasyonunu bulamıyor musun?",
-    "helpLink": "Ekibimiz sana yardımcı olacak."
+    "helpLink": "Ekibimiz sana yardımcı olacak.",
+    "dropHint": "veya bilet PDF / fotoğrafını buraya bırak"
   },
   "overview": {
     "title": "Rezervasyonlarına Genel Bakış",

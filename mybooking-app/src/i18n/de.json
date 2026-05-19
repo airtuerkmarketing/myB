@@ -11,7 +11,8 @@
     "surnamePlaceholder": "Nachname",
     "cta": "Buchung Abfragen",
     "helpText": "Du brauchst Hilfe oder findest deine Buchung nicht?",
-    "helpLink": "Unser Team hilft dir weiter."
+    "helpLink": "Unser Team hilft dir weiter.",
+    "dropHint": "oder Ticket-PDF / Foto hier ablegen"
   },
   "overview": {
     "title": "Deine Buchungen im Überblick",
