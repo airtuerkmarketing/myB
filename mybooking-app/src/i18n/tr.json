@@ -57,7 +57,31 @@
     "oneCheckedIn": "{name} check-in yaptı.",
     "manyCheckedIn": "{names} check-in yaptı.",
     "oneMissing": "{name} henüz check-in yapmadı.",
-    "manyMissing": "{names} henüz check-in yapmadı."
+    "manyMissing": "{names} henüz check-in yapmadı.",
+    "nextDay": "+1",
+    "smartCta": {
+      "justOpened": "Şimdi check-in yap — yeni açıldı!",
+      "checkinNow": "Şimdi check-in yap",
+      "partialCheckin": "{remaining} yolcu henüz check-in yapmadı",
+      "showBoardingPass": "Biniş kartlarını göster",
+      "closed": "Check-in kapandı — havalimanında check-in yapın",
+      "cancelled": "Uçuş iptal edildi",
+      "opensOn": "Check-in {date} tarihinde açılıyor",
+      "opensIn": "Check-in {hours} saat içinde açılıyor",
+      "opensInDays": "Check-in {days} gün içinde açılıyor"
+    },
+    "multiSegment": {
+      "stopover": "{city} aktarma · {duration} bekleme"
+    },
+    "partial": {
+      "summary": "{names} check-in yaptı. {remaining} henüz check-in yapmadı."
+    },
+    "infant": {
+      "info": "{adultName} kucağında seyahat ediyor"
+    },
+    "cancelledAction": {
+      "whatNow": "Şimdi ne olacak? Seçenekleri görüntüle"
+    }
   },
   "checkin": {
     "title": "Check-in",
@@ -97,7 +121,16 @@
     "viewBoardingPasses": "Biniş kartlarını göster",
     "backToOverview": "Genel bakışa dön",
     "route": "Güzergah",
-    "passengersLabel": "Yolcular"
+    "passengersLabel": "Yolcular",
+    "step1": "Yolcular",
+    "step2": "Ekstralar",
+    "step3": "Onay",
+    "linkedChild": "{childName}, {adultName} ile seyahat ediyor",
+    "confirm": "Tüm bilgilerin doğru olduğunu onaylıyorum",
+    "processing": "İşleniyor…",
+    "success": "Check-in başarılı!",
+    "boardingReady": "Biniş kartların hazır",
+    "checkedInFor": "{names} {flight} için check-in yapıldı"
   },
   "extras": {
     "title": "Ekstra ekle",
@@ -134,6 +167,7 @@
     "boarding": "Biniş",
     "brightnessTip": "İpucu: Daha iyi tarama için ekran parlaklığınızı artırın",
     "saveWallet": "Cüzdana Kaydet",
+    "addToWallet": "Cüzdana Kaydet",
     "downloadPdf": "PDF olarak indir",
     "sendEmail": "E-posta ile gönder",
     "share": "Paylaş"
@@ -142,6 +176,14 @@
     "title": "Seyahatinden daha fazlasını al",
     "addNow": "Şimdi Ekle",
     "learnMore": "Daha fazla bilgi"
+  },
+  "scenario": {
+    "family": "Aile — Gidiş-Dönüş",
+    "solo": "Tek Kişi — Sadece Gidiş",
+    "multiSegment": "Çift — Aktarmalı Uçuş",
+    "partialCheckin": "Kısmen check-in yapıldı",
+    "problems": "Sorunlar — İptal & Kapalı",
+    "allDone": "Tamamlandı — Biniş kartları hazır"
   },
   "footer": {
     "terms": "Kullanım Koşulları",

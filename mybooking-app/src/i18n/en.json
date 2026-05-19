@@ -57,7 +57,31 @@
     "oneCheckedIn": "{name} is checked in.",
     "manyCheckedIn": "{names} are checked in.",
     "oneMissing": "{name} still needs check-in.",
-    "manyMissing": "{names} still need check-in."
+    "manyMissing": "{names} still need check-in.",
+    "nextDay": "+1",
+    "smartCta": {
+      "justOpened": "Check in now — just opened!",
+      "checkinNow": "Check in now",
+      "partialCheckin": "{remaining} passengers still need check-in",
+      "showBoardingPass": "View boarding passes",
+      "closed": "Check-in closed — check in at the airport",
+      "cancelled": "Flight was cancelled",
+      "opensOn": "Check-in opens on {date}",
+      "opensIn": "Check-in opens in {hours} hours",
+      "opensInDays": "Check-in opens in {days} days"
+    },
+    "multiSegment": {
+      "stopover": "Stopover in {city} · {duration}"
+    },
+    "partial": {
+      "summary": "{names} are checked in. {remaining} still need check-in."
+    },
+    "infant": {
+      "info": "Traveling on {adultName}'s lap"
+    },
+    "cancelledAction": {
+      "whatNow": "What now? View options"
+    }
   },
   "checkin": {
     "title": "Check-in",
@@ -97,7 +121,16 @@
     "viewBoardingPasses": "View boarding passes",
     "backToOverview": "Back to overview",
     "route": "Route",
-    "passengersLabel": "Passengers"
+    "passengersLabel": "Passengers",
+    "step1": "Passengers",
+    "step2": "Extras",
+    "step3": "Confirmation",
+    "linkedChild": "{childName} travels with {adultName}",
+    "confirm": "I confirm that all information is correct",
+    "processing": "Processing…",
+    "success": "Check-in successful!",
+    "boardingReady": "Your boarding passes are ready",
+    "checkedInFor": "{names} checked in for {flight}"
   },
   "extras": {
     "title": "Add extras",
@@ -134,6 +167,7 @@
     "boarding": "Boarding",
     "brightnessTip": "Tip: Increase your screen brightness for better scanning",
     "saveWallet": "Save to Wallet",
+    "addToWallet": "Save to Wallet",
     "downloadPdf": "Download as PDF",
     "sendEmail": "Send via email",
     "share": "Share"
@@ -142,6 +176,14 @@
     "title": "Get more out of your trip",
     "addNow": "Add Now",
     "learnMore": "Learn more"
+  },
+  "scenario": {
+    "family": "Family — Round trip",
+    "solo": "Solo — One-way flight",
+    "multiSegment": "Couple — Connecting flight",
+    "partialCheckin": "Partially checked in",
+    "problems": "Problems — Cancelled & Closed",
+    "allDone": "All done — Boarding passes ready"
   },
   "footer": {
     "terms": "Terms & Conditions",

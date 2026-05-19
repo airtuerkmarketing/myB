@@ -57,7 +57,31 @@
     "oneCheckedIn": "{name} ist eingecheckt.",
     "manyCheckedIn": "{names} sind eingecheckt.",
     "oneMissing": "{name} fehlt noch.",
-    "manyMissing": "{names} fehlen noch."
+    "manyMissing": "{names} fehlen noch.",
+    "nextDay": "+1",
+    "smartCta": {
+      "justOpened": "Jetzt einchecken — gerade geöffnet!",
+      "checkinNow": "Jetzt einchecken",
+      "partialCheckin": "{remaining} Passagiere noch einchecken",
+      "showBoardingPass": "Bordkarten anzeigen",
+      "closed": "Check-in geschlossen — am Flughafen einchecken",
+      "cancelled": "Flug wurde storniert",
+      "opensOn": "Check-in öffnet am {date}",
+      "opensIn": "Check-in öffnet in {hours} Stunden",
+      "opensInDays": "Check-in öffnet in {days} Tagen"
+    },
+    "multiSegment": {
+      "stopover": "Umstieg in {city} · {duration} Aufenthalt"
+    },
+    "partial": {
+      "summary": "{names} sind eingecheckt. {remaining} fehlen noch."
+    },
+    "infant": {
+      "info": "Reist auf dem Schoß von {adultName}"
+    },
+    "cancelledAction": {
+      "whatNow": "Was jetzt? Optionen anzeigen"
+    }
   },
   "checkin": {
     "title": "Check-in",
@@ -97,7 +121,16 @@
     "viewBoardingPasses": "Bordkarten anzeigen",
     "backToOverview": "Zurück zur Übersicht",
     "route": "Strecke",
-    "passengersLabel": "Passagiere"
+    "passengersLabel": "Passagiere",
+    "step1": "Passagiere",
+    "step2": "Extras",
+    "step3": "Bestätigung",
+    "linkedChild": "{childName} reist mit {adultName}",
+    "confirm": "Ich bestätige, dass alle Angaben korrekt sind",
+    "processing": "Wird verarbeitet…",
+    "success": "Check-in erfolgreich!",
+    "boardingReady": "Deine Bordkarten sind bereit",
+    "checkedInFor": "{names} eingecheckt für {flight}"
   },
   "extras": {
     "title": "Extras hinzufügen",
@@ -134,6 +167,7 @@
     "boarding": "Boarding",
     "brightnessTip": "Tipp: Erhöhe die Display-Helligkeit für besseres Scannen",
     "saveWallet": "In Wallet speichern",
+    "addToWallet": "In Wallet speichern",
     "downloadPdf": "Als PDF laden",
     "sendEmail": "Per E-Mail senden",
     "share": "Teilen"
@@ -142,6 +176,14 @@
     "title": "Mehr aus deiner Reise machen",
     "addNow": "Jetzt Hinzufügen",
     "learnMore": "Mehr erfahren"
+  },
+  "scenario": {
+    "family": "Familie — Hin+Rück",
+    "solo": "Solo — Nur Hinflug",
+    "multiSegment": "Paar — Hinflug mit Umstieg",
+    "partialCheckin": "Teilweise eingecheckt",
+    "problems": "Probleme — Storniert & Geschlossen",
+    "allDone": "Alles erledigt — Bordkarten bereit"
   },
   "footer": {
     "terms": "AGB",
