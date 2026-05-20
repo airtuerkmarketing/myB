@@ -98,7 +98,7 @@ export default function BookingOverview() {
                   className="animate-fade-in-up"
                   style={{ animationDelay: `${index * 80}ms` }}
                 >
-                  <TripCard trip={trip} booking={booking} onAddExtras={handleAddExtras} />
+                  <TripCard trip={trip} booking={booking} onAddExtras={handleAddExtras} totalTrips={sortedTrips.length} />
                 </div>
               ))}
             </div>

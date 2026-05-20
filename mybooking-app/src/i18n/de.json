@@ -82,6 +82,10 @@
     },
     "cancelledAction": {
       "whatNow": "Was jetzt? Optionen anzeigen"
+    },
+    "accordion": {
+      "details": "Passagiere, Gepäck und Ticketdetails",
+      "detailsMulti": "Passagiere und Details für beide Flüge"
     }
   },
   "checkin": {

@@ -82,6 +82,10 @@
     },
     "cancelledAction": {
       "whatNow": "What now? View options"
+    },
+    "accordion": {
+      "details": "Passengers, luggage and ticket details",
+      "detailsMulti": "Passengers and details for both flights"
     }
   },
   "checkin": {

@@ -82,6 +82,10 @@
     },
     "cancelledAction": {
       "whatNow": "Şimdi ne olacak? Seçenekleri görüntüle"
+    },
+    "accordion": {
+      "details": "Yolcular, bagaj ve bilet detayları",
+      "detailsMulti": "Her iki uçuş için yolcular ve detaylar"
     }
   },
   "checkin": {
