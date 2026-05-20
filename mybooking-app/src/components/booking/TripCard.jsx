@@ -7,6 +7,7 @@ import {
 import { useTranslation } from "../../hooks/useTranslation";
 import { useBooking } from "../../context/BookingContext";
 import { AirlineLogo } from "@/components/ui/AirlineLogo";
+import StopoverBanner from "./StopoverBanner";
 import {
   getSegmentCheckinSummary,
   getPassenger,
@@ -16,16 +17,6 @@ import {
 } from "../../data/dummyData";
 import { cn } from "@/lib/utils";
 
-function calcLayover(seg1, seg2) {
-  const arr = new Date(`${seg1.arrival.date}T${seg1.arrival.time}:00`);
-  const dep = new Date(`${seg2.departure.date}T${seg2.departure.time}:00`);
-  const mins = Math.round((dep - arr) / 60000);
-  const h = Math.floor(mins / 60);
-  const m = mins % 60;
-  if (h === 0) return `${m}min`;
-  if (m === 0) return `${h}h`;
-  return `${h}h ${m}min`;
-}
 
 function getStatusPill(segment, t) {
   const summary = getSegmentCheckinSummary(segment);
@@ -172,24 +163,6 @@ function CompactFlightTimes({ segment }) {
           <p className="text-[11px] text-[#B0B0B0]">{segment.arrival.date}</p>
         </div>
       </div>
-    </div>
-  );
-}
-
-// ─── Layover Divider ──────────────────────────────
-
-function LayoverDivider({ prevSegment, nextSegment }) {
-  const { t } = useTranslation();
-  const duration = calcLayover(prevSegment, nextSegment);
-  const city = prevSegment.arrival.airport;
-
-  return (
-    <div className="flex items-center gap-2 py-2 mx-4">
-      <div className="flex-1 border-t border-dashed border-[#DDDDDD]" />
-      <span className="text-[10px] text-[#717171] italic whitespace-nowrap">
-        {t("overview.layover", { city, duration })}
-      </span>
-      <div className="flex-1 border-t border-dashed border-[#DDDDDD]" />
     </div>
   );
 }
@@ -480,7 +453,7 @@ export default function TripCard({ trip, booking, onAddExtras, totalTrips }) {
       {/* ═══ Always visible ═══ */}
       {trip.segments.map((seg, i) => (
         <Fragment key={seg.id}>
-          {i > 0 && <LayoverDivider prevSegment={trip.segments[i - 1]} nextSegment={seg} />}
+          {i > 0 && <StopoverBanner prevSegment={trip.segments[i - 1]} nextSegment={seg} />}
           <AirlineRow segment={seg} />
           <CompactFlightTimes segment={seg} />
         </Fragment>

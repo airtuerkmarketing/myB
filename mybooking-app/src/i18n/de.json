@@ -83,6 +83,14 @@
     "cancelledAction": {
       "whatNow": "Was jetzt? Optionen anzeigen"
     },
+    "stopover": {
+      "title": "Umstieg in {city}",
+      "firstFlight": "Erster Flug",
+      "connecting": "Anschlussflug",
+      "terminalChange": "Terminalwechsel: Terminal {from} → Terminal {to}",
+      "landed": "gelandet",
+      "tight": "Knappe Umstiegszeit"
+    },
     "accordion": {
       "details": "Passagiere, Gepäck und Ticketdetails",
       "detailsMulti": "Passagiere und Details für beide Flüge"

@@ -83,6 +83,14 @@
     "cancelledAction": {
       "whatNow": "What now? View options"
     },
+    "stopover": {
+      "title": "Stopover in {city}",
+      "firstFlight": "First flight",
+      "connecting": "Connecting flight",
+      "terminalChange": "Terminal change: Terminal {from} → Terminal {to}",
+      "landed": "landed",
+      "tight": "Tight connection"
+    },
     "accordion": {
       "details": "Passengers, luggage and ticket details",
       "detailsMulti": "Passengers and details for both flights"

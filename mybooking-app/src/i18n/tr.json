@@ -83,6 +83,14 @@
     "cancelledAction": {
       "whatNow": "Şimdi ne olacak? Seçenekleri görüntüle"
     },
+    "stopover": {
+      "title": "{city} aktarma",
+      "firstFlight": "İlk uçuş",
+      "connecting": "Aktarma uçuşu",
+      "terminalChange": "Terminal değişikliği: Terminal {from} → Terminal {to}",
+      "landed": "iniş",
+      "tight": "Kısa aktarma süresi"
+    },
     "accordion": {
       "details": "Yolcular, bagaj ve bilet detayları",
       "detailsMulti": "Her iki uçuş için yolcular ve detaylar"
