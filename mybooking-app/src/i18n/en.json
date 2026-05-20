@@ -85,8 +85,6 @@
     },
     "stopover": {
       "title": "Stopover in {city}",
-      "firstFlight": "First flight",
-      "connecting": "Connecting flight",
       "terminalChange": "Terminal change: Terminal {from} → Terminal {to}",
       "landed": "landed",
       "tight": "Tight connection"

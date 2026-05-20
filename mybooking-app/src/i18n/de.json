@@ -85,8 +85,6 @@
     },
     "stopover": {
       "title": "Umstieg in {city}",
-      "firstFlight": "Erster Flug",
-      "connecting": "Anschlussflug",
       "terminalChange": "Terminalwechsel: Terminal {from} → Terminal {to}",
       "landed": "gelandet",
       "tight": "Knappe Umstiegszeit"

@@ -32,21 +32,6 @@ export default function StopoverBanner({ prevSegment, nextSegment }) {
 
   return (
     <div className="mx-4 my-1">
-      {/* Context: first flight landed */}
-      <div className="flex items-center gap-1.5 text-[10px] text-[#717171] mb-1.5 pl-1">
-        <span className="font-medium">
-          {t("overview.stopover.firstFlight")}:
-        </span>
-        <span>
-          {prevSegment.departure.code} → {prevSegment.arrival.code}
-        </span>
-        <span className="text-[#DDDDDD]">·</span>
-        <span>
-          {t("overview.arrival")} {prevSegment.arrival.time}
-        </span>
-      </div>
-
-      {/* Amber banner */}
       <div className="bg-[#FEF3C7] border border-[#FDE68A] rounded-xl px-3.5 py-3">
         <div className="flex items-start gap-2.5">
           <div className="w-8 h-8 rounded-lg bg-[#FBBF24] flex items-center justify-center shrink-0 mt-0.5">
@@ -54,7 +39,6 @@ export default function StopoverBanner({ prevSegment, nextSegment }) {
           </div>
 
           <div className="flex-1 min-w-0">
-            {/* Title + duration pill */}
             <div className="flex items-center gap-2 flex-wrap">
               <span className="text-sm font-semibold text-[#92400E]">
                 {t("overview.stopover.title", { city })}
@@ -70,7 +54,6 @@ export default function StopoverBanner({ prevSegment, nextSegment }) {
               )}
             </div>
 
-            {/* Terminal change warning */}
             {hasTerminalChange && (
               <div className="flex items-center gap-1 mt-1.5 text-[11px] text-[#92400E]">
                 <AlertTriangle size={12} className="text-[#F59E0B] shrink-0" />
@@ -83,7 +66,6 @@ export default function StopoverBanner({ prevSegment, nextSegment }) {
               </div>
             )}
 
-            {/* Progress bar */}
             <div className="mt-2.5">
               <div className="flex items-center justify-between text-[9px] text-[#92400E]/70 mb-1">
                 <span>
@@ -105,20 +87,6 @@ export default function StopoverBanner({ prevSegment, nextSegment }) {
             </div>
           </div>
         </div>
-      </div>
-
-      {/* Context: connecting flight departs */}
-      <div className="flex items-center gap-1.5 text-[10px] text-[#717171] mt-1.5 pl-1">
-        <span className="font-medium">
-          {t("overview.stopover.connecting")}:
-        </span>
-        <span>
-          {nextSegment.departure.code} → {nextSegment.arrival.code}
-        </span>
-        <span className="text-[#DDDDDD]">·</span>
-        <span>
-          {t("overview.departure")} {nextSegment.departure.time}
-        </span>
       </div>
     </div>
   );

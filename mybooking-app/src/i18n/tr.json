@@ -85,8 +85,6 @@
     },
     "stopover": {
       "title": "{city} aktarma",
-      "firstFlight": "İlk uçuş",
-      "connecting": "Aktarma uçuşu",
       "terminalChange": "Terminal değişikliği: Terminal {from} → Terminal {to}",
       "landed": "iniş",
       "tight": "Kısa aktarma süresi"
