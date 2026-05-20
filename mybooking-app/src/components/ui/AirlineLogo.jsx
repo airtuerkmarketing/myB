@@ -9,7 +9,7 @@ const airlineConfig = {
   "Aegean Airlines": { initials: "A3", code: "A3", colors: ["#00205B", "#00205B"], textColor: "#fff" },
 };
 
-const localLogoCodes = new Set(["XQ", "LH", "TK", "AJ", "EK", "TP", "WA", "XR"]);
+const localLogoCodes = new Set(["XQ", "LH", "TK", "A3", "AJ", "EK", "TP", "WA", "XR"]);
 
 const sizes = {
   sm: { box: 28, font: 10 },
